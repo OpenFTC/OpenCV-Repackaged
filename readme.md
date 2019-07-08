@@ -1,4 +1,4 @@
-## OpenCV-Repackaged-For-Bintray
+## OpenCV-Repackaged
 
 ### What exactly is this?
 
