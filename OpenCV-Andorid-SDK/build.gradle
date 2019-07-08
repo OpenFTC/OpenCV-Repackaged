@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 ext {
     PUBLISH_GROUP_ID = 'org.openftc'
     PUBLISH_ARTIFACT_ID = 'opencv-repackaged'
-    PUBLISH_VERSION = '3.4.2-test'
+    PUBLISH_VERSION = '4.1.0-test'
 }
 
 android {
@@ -28,5 +28,8 @@ android {
     }
 }
 
+dependencies {
+    compileOnly 'org.openftc:robotcore-stock:5.0'
+}
 
 apply from: '../release-aar.gradle'
