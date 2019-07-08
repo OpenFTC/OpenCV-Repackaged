@@ -171,7 +171,7 @@ public class DynamicOpenCvNativeLibLoader
              */
             if(!MD5.checkMD5(NATIVE_LIB_MD5, libInProtectedStorage))
             {
-                showLibCorruptedDialog();
+                throw new OpenCvNativeLibCorruptedException();
             }
         }
     }
