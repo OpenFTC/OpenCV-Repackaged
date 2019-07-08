@@ -16,7 +16,7 @@ public class CalibrateDebevec extends CalibrateCRF {
     public static CalibrateDebevec __fromPtr__(long addr) { return new CalibrateDebevec(addr); }
 
     //
-    // C++:  bool getRandom()
+    // C++:  bool cv::CalibrateDebevec::getRandom()
     //
 
     //javadoc: CalibrateDebevec::getRandom()
@@ -30,7 +30,7 @@ public class CalibrateDebevec extends CalibrateCRF {
 
 
     //
-    // C++:  float getLambda()
+    // C++:  float cv::CalibrateDebevec::getLambda()
     //
 
     //javadoc: CalibrateDebevec::getLambda()
@@ -44,7 +44,7 @@ public class CalibrateDebevec extends CalibrateCRF {
 
 
     //
-    // C++:  int getSamples()
+    // C++:  int cv::CalibrateDebevec::getSamples()
     //
 
     //javadoc: CalibrateDebevec::getSamples()
@@ -58,7 +58,7 @@ public class CalibrateDebevec extends CalibrateCRF {
 
 
     //
-    // C++:  void setLambda(float lambda)
+    // C++:  void cv::CalibrateDebevec::setLambda(float lambda)
     //
 
     //javadoc: CalibrateDebevec::setLambda(lambda)
@@ -72,7 +72,7 @@ public class CalibrateDebevec extends CalibrateCRF {
 
 
     //
-    // C++:  void setRandom(bool random)
+    // C++:  void cv::CalibrateDebevec::setRandom(bool random)
     //
 
     //javadoc: CalibrateDebevec::setRandom(random)
@@ -86,7 +86,7 @@ public class CalibrateDebevec extends CalibrateCRF {
 
 
     //
-    // C++:  void setSamples(int samples)
+    // C++:  void cv::CalibrateDebevec::setSamples(int samples)
     //
 
     //javadoc: CalibrateDebevec::setSamples(samples)
@@ -106,22 +106,22 @@ public class CalibrateDebevec extends CalibrateCRF {
 
 
 
-    // C++:  bool getRandom()
+    // C++:  bool cv::CalibrateDebevec::getRandom()
     private static native boolean getRandom_0(long nativeObj);
 
-    // C++:  float getLambda()
+    // C++:  float cv::CalibrateDebevec::getLambda()
     private static native float getLambda_0(long nativeObj);
 
-    // C++:  int getSamples()
+    // C++:  int cv::CalibrateDebevec::getSamples()
     private static native int getSamples_0(long nativeObj);
 
-    // C++:  void setLambda(float lambda)
+    // C++:  void cv::CalibrateDebevec::setLambda(float lambda)
     private static native void setLambda_0(long nativeObj, float lambda);
 
-    // C++:  void setRandom(bool random)
+    // C++:  void cv::CalibrateDebevec::setRandom(bool random)
     private static native void setRandom_0(long nativeObj, boolean random);
 
-    // C++:  void setSamples(int samples)
+    // C++:  void cv::CalibrateDebevec::setSamples(int samples)
     private static native void setSamples_0(long nativeObj, int samples);
 
     // native support for java finalize()

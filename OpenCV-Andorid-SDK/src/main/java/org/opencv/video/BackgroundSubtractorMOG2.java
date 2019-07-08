@@ -17,7 +17,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
     public static BackgroundSubtractorMOG2 __fromPtr__(long addr) { return new BackgroundSubtractorMOG2(addr); }
 
     //
-    // C++:  bool getDetectShadows()
+    // C++:  bool cv::BackgroundSubtractorMOG2::getDetectShadows()
     //
 
     //javadoc: BackgroundSubtractorMOG2::getDetectShadows()
@@ -31,7 +31,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  double getBackgroundRatio()
+    // C++:  double cv::BackgroundSubtractorMOG2::getBackgroundRatio()
     //
 
     //javadoc: BackgroundSubtractorMOG2::getBackgroundRatio()
@@ -45,7 +45,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  double getComplexityReductionThreshold()
+    // C++:  double cv::BackgroundSubtractorMOG2::getComplexityReductionThreshold()
     //
 
     //javadoc: BackgroundSubtractorMOG2::getComplexityReductionThreshold()
@@ -59,7 +59,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  double getShadowThreshold()
+    // C++:  double cv::BackgroundSubtractorMOG2::getShadowThreshold()
     //
 
     //javadoc: BackgroundSubtractorMOG2::getShadowThreshold()
@@ -73,7 +73,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  double getVarInit()
+    // C++:  double cv::BackgroundSubtractorMOG2::getVarInit()
     //
 
     //javadoc: BackgroundSubtractorMOG2::getVarInit()
@@ -87,7 +87,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  double getVarMax()
+    // C++:  double cv::BackgroundSubtractorMOG2::getVarMax()
     //
 
     //javadoc: BackgroundSubtractorMOG2::getVarMax()
@@ -101,7 +101,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  double getVarMin()
+    // C++:  double cv::BackgroundSubtractorMOG2::getVarMin()
     //
 
     //javadoc: BackgroundSubtractorMOG2::getVarMin()
@@ -115,7 +115,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  double getVarThreshold()
+    // C++:  double cv::BackgroundSubtractorMOG2::getVarThreshold()
     //
 
     //javadoc: BackgroundSubtractorMOG2::getVarThreshold()
@@ -129,7 +129,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  double getVarThresholdGen()
+    // C++:  double cv::BackgroundSubtractorMOG2::getVarThresholdGen()
     //
 
     //javadoc: BackgroundSubtractorMOG2::getVarThresholdGen()
@@ -143,7 +143,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  int getHistory()
+    // C++:  int cv::BackgroundSubtractorMOG2::getHistory()
     //
 
     //javadoc: BackgroundSubtractorMOG2::getHistory()
@@ -157,7 +157,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  int getNMixtures()
+    // C++:  int cv::BackgroundSubtractorMOG2::getNMixtures()
     //
 
     //javadoc: BackgroundSubtractorMOG2::getNMixtures()
@@ -171,7 +171,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  int getShadowValue()
+    // C++:  int cv::BackgroundSubtractorMOG2::getShadowValue()
     //
 
     //javadoc: BackgroundSubtractorMOG2::getShadowValue()
@@ -185,7 +185,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  void apply(Mat image, Mat& fgmask, double learningRate = -1)
+    // C++:  void cv::BackgroundSubtractorMOG2::apply(Mat image, Mat& fgmask, double learningRate = -1)
     //
 
     //javadoc: BackgroundSubtractorMOG2::apply(image, fgmask, learningRate)
@@ -208,7 +208,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  void setBackgroundRatio(double ratio)
+    // C++:  void cv::BackgroundSubtractorMOG2::setBackgroundRatio(double ratio)
     //
 
     //javadoc: BackgroundSubtractorMOG2::setBackgroundRatio(ratio)
@@ -222,7 +222,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  void setComplexityReductionThreshold(double ct)
+    // C++:  void cv::BackgroundSubtractorMOG2::setComplexityReductionThreshold(double ct)
     //
 
     //javadoc: BackgroundSubtractorMOG2::setComplexityReductionThreshold(ct)
@@ -236,7 +236,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  void setDetectShadows(bool detectShadows)
+    // C++:  void cv::BackgroundSubtractorMOG2::setDetectShadows(bool detectShadows)
     //
 
     //javadoc: BackgroundSubtractorMOG2::setDetectShadows(detectShadows)
@@ -250,7 +250,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  void setHistory(int history)
+    // C++:  void cv::BackgroundSubtractorMOG2::setHistory(int history)
     //
 
     //javadoc: BackgroundSubtractorMOG2::setHistory(history)
@@ -264,7 +264,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  void setNMixtures(int nmixtures)
+    // C++:  void cv::BackgroundSubtractorMOG2::setNMixtures(int nmixtures)
     //
 
     //javadoc: BackgroundSubtractorMOG2::setNMixtures(nmixtures)
@@ -278,7 +278,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  void setShadowThreshold(double threshold)
+    // C++:  void cv::BackgroundSubtractorMOG2::setShadowThreshold(double threshold)
     //
 
     //javadoc: BackgroundSubtractorMOG2::setShadowThreshold(threshold)
@@ -292,7 +292,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  void setShadowValue(int value)
+    // C++:  void cv::BackgroundSubtractorMOG2::setShadowValue(int value)
     //
 
     //javadoc: BackgroundSubtractorMOG2::setShadowValue(value)
@@ -306,7 +306,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  void setVarInit(double varInit)
+    // C++:  void cv::BackgroundSubtractorMOG2::setVarInit(double varInit)
     //
 
     //javadoc: BackgroundSubtractorMOG2::setVarInit(varInit)
@@ -320,7 +320,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  void setVarMax(double varMax)
+    // C++:  void cv::BackgroundSubtractorMOG2::setVarMax(double varMax)
     //
 
     //javadoc: BackgroundSubtractorMOG2::setVarMax(varMax)
@@ -334,7 +334,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  void setVarMin(double varMin)
+    // C++:  void cv::BackgroundSubtractorMOG2::setVarMin(double varMin)
     //
 
     //javadoc: BackgroundSubtractorMOG2::setVarMin(varMin)
@@ -348,7 +348,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  void setVarThreshold(double varThreshold)
+    // C++:  void cv::BackgroundSubtractorMOG2::setVarThreshold(double varThreshold)
     //
 
     //javadoc: BackgroundSubtractorMOG2::setVarThreshold(varThreshold)
@@ -362,7 +362,7 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
     //
-    // C++:  void setVarThresholdGen(double varThresholdGen)
+    // C++:  void cv::BackgroundSubtractorMOG2::setVarThresholdGen(double varThresholdGen)
     //
 
     //javadoc: BackgroundSubtractorMOG2::setVarThresholdGen(varThresholdGen)
@@ -382,80 +382,80 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
 
 
-    // C++:  bool getDetectShadows()
+    // C++:  bool cv::BackgroundSubtractorMOG2::getDetectShadows()
     private static native boolean getDetectShadows_0(long nativeObj);
 
-    // C++:  double getBackgroundRatio()
+    // C++:  double cv::BackgroundSubtractorMOG2::getBackgroundRatio()
     private static native double getBackgroundRatio_0(long nativeObj);
 
-    // C++:  double getComplexityReductionThreshold()
+    // C++:  double cv::BackgroundSubtractorMOG2::getComplexityReductionThreshold()
     private static native double getComplexityReductionThreshold_0(long nativeObj);
 
-    // C++:  double getShadowThreshold()
+    // C++:  double cv::BackgroundSubtractorMOG2::getShadowThreshold()
     private static native double getShadowThreshold_0(long nativeObj);
 
-    // C++:  double getVarInit()
+    // C++:  double cv::BackgroundSubtractorMOG2::getVarInit()
     private static native double getVarInit_0(long nativeObj);
 
-    // C++:  double getVarMax()
+    // C++:  double cv::BackgroundSubtractorMOG2::getVarMax()
     private static native double getVarMax_0(long nativeObj);
 
-    // C++:  double getVarMin()
+    // C++:  double cv::BackgroundSubtractorMOG2::getVarMin()
     private static native double getVarMin_0(long nativeObj);
 
-    // C++:  double getVarThreshold()
+    // C++:  double cv::BackgroundSubtractorMOG2::getVarThreshold()
     private static native double getVarThreshold_0(long nativeObj);
 
-    // C++:  double getVarThresholdGen()
+    // C++:  double cv::BackgroundSubtractorMOG2::getVarThresholdGen()
     private static native double getVarThresholdGen_0(long nativeObj);
 
-    // C++:  int getHistory()
+    // C++:  int cv::BackgroundSubtractorMOG2::getHistory()
     private static native int getHistory_0(long nativeObj);
 
-    // C++:  int getNMixtures()
+    // C++:  int cv::BackgroundSubtractorMOG2::getNMixtures()
     private static native int getNMixtures_0(long nativeObj);
 
-    // C++:  int getShadowValue()
+    // C++:  int cv::BackgroundSubtractorMOG2::getShadowValue()
     private static native int getShadowValue_0(long nativeObj);
 
-    // C++:  void apply(Mat image, Mat& fgmask, double learningRate = -1)
+    // C++:  void cv::BackgroundSubtractorMOG2::apply(Mat image, Mat& fgmask, double learningRate = -1)
     private static native void apply_0(long nativeObj, long image_nativeObj, long fgmask_nativeObj, double learningRate);
     private static native void apply_1(long nativeObj, long image_nativeObj, long fgmask_nativeObj);
 
-    // C++:  void setBackgroundRatio(double ratio)
+    // C++:  void cv::BackgroundSubtractorMOG2::setBackgroundRatio(double ratio)
     private static native void setBackgroundRatio_0(long nativeObj, double ratio);
 
-    // C++:  void setComplexityReductionThreshold(double ct)
+    // C++:  void cv::BackgroundSubtractorMOG2::setComplexityReductionThreshold(double ct)
     private static native void setComplexityReductionThreshold_0(long nativeObj, double ct);
 
-    // C++:  void setDetectShadows(bool detectShadows)
+    // C++:  void cv::BackgroundSubtractorMOG2::setDetectShadows(bool detectShadows)
     private static native void setDetectShadows_0(long nativeObj, boolean detectShadows);
 
-    // C++:  void setHistory(int history)
+    // C++:  void cv::BackgroundSubtractorMOG2::setHistory(int history)
     private static native void setHistory_0(long nativeObj, int history);
 
-    // C++:  void setNMixtures(int nmixtures)
+    // C++:  void cv::BackgroundSubtractorMOG2::setNMixtures(int nmixtures)
     private static native void setNMixtures_0(long nativeObj, int nmixtures);
 
-    // C++:  void setShadowThreshold(double threshold)
+    // C++:  void cv::BackgroundSubtractorMOG2::setShadowThreshold(double threshold)
     private static native void setShadowThreshold_0(long nativeObj, double threshold);
 
-    // C++:  void setShadowValue(int value)
+    // C++:  void cv::BackgroundSubtractorMOG2::setShadowValue(int value)
     private static native void setShadowValue_0(long nativeObj, int value);
 
-    // C++:  void setVarInit(double varInit)
+    // C++:  void cv::BackgroundSubtractorMOG2::setVarInit(double varInit)
     private static native void setVarInit_0(long nativeObj, double varInit);
 
-    // C++:  void setVarMax(double varMax)
+    // C++:  void cv::BackgroundSubtractorMOG2::setVarMax(double varMax)
     private static native void setVarMax_0(long nativeObj, double varMax);
 
-    // C++:  void setVarMin(double varMin)
+    // C++:  void cv::BackgroundSubtractorMOG2::setVarMin(double varMin)
     private static native void setVarMin_0(long nativeObj, double varMin);
 
-    // C++:  void setVarThreshold(double varThreshold)
+    // C++:  void cv::BackgroundSubtractorMOG2::setVarThreshold(double varThreshold)
     private static native void setVarThreshold_0(long nativeObj, double varThreshold);
 
-    // C++:  void setVarThresholdGen(double varThresholdGen)
+    // C++:  void cv::BackgroundSubtractorMOG2::setVarThresholdGen(double varThresholdGen)
     private static native void setVarThresholdGen_0(long nativeObj, double varThresholdGen);
 
     // native support for java finalize()

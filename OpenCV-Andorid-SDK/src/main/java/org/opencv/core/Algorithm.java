@@ -19,7 +19,7 @@ public class Algorithm {
     public static Algorithm __fromPtr__(long addr) { return new Algorithm(addr); }
 
     //
-    // C++:  String getDefaultName()
+    // C++:  String cv::Algorithm::getDefaultName()
     //
 
     //javadoc: Algorithm::getDefaultName()
@@ -33,7 +33,7 @@ public class Algorithm {
 
 
     //
-    // C++:  bool empty()
+    // C++:  bool cv::Algorithm::empty()
     //
 
     //javadoc: Algorithm::empty()
@@ -47,7 +47,7 @@ public class Algorithm {
 
 
     //
-    // C++:  void clear()
+    // C++:  void cv::Algorithm::clear()
     //
 
     //javadoc: Algorithm::clear()
@@ -61,14 +61,14 @@ public class Algorithm {
 
 
     //
-    // C++:  void read(FileNode fn)
+    // C++:  void cv::Algorithm::read(FileNode fn)
     //
 
     // Unknown type 'FileNode' (I), skipping the function
 
 
     //
-    // C++:  void save(String filename)
+    // C++:  void cv::Algorithm::save(String filename)
     //
 
     //javadoc: Algorithm::save(filename)
@@ -82,7 +82,7 @@ public class Algorithm {
 
 
     //
-    // C++:  void write(Ptr_FileStorage fs, String name = String())
+    // C++:  void cv::Algorithm::write(Ptr_FileStorage fs, String name = String())
     //
 
     // Unknown type 'Ptr_FileStorage' (I), skipping the function
@@ -95,16 +95,16 @@ public class Algorithm {
 
 
 
-    // C++:  String getDefaultName()
+    // C++:  String cv::Algorithm::getDefaultName()
     private static native String getDefaultName_0(long nativeObj);
 
-    // C++:  bool empty()
+    // C++:  bool cv::Algorithm::empty()
     private static native boolean empty_0(long nativeObj);
 
-    // C++:  void clear()
+    // C++:  void cv::Algorithm::clear()
     private static native void clear_0(long nativeObj);
 
-    // C++:  void save(String filename)
+    // C++:  void cv::Algorithm::save(String filename)
     private static native void save_0(long nativeObj, String filename);
 
     // native support for java finalize()

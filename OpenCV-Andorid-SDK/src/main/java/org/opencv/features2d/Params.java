@@ -19,7 +19,7 @@ public class Params {
     public static Params __fromPtr__(long addr) { return new Params(addr); }
 
     //
-    // C++:   Params()
+    // C++:   cv::SimpleBlobDetector::Params::Params()
     //
 
     //javadoc: Params::Params()
@@ -557,7 +557,7 @@ public class Params {
 
 
 
-    // C++:   Params()
+    // C++:   cv::SimpleBlobDetector::Params::Params()
     private static native long Params_0();
 
     // C++: float Params::thresholdStep

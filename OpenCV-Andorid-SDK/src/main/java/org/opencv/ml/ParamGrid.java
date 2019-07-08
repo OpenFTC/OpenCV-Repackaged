@@ -19,7 +19,7 @@ public class ParamGrid {
     public static ParamGrid __fromPtr__(long addr) { return new ParamGrid(addr); }
 
     //
-    // C++: static Ptr_ParamGrid create(double minVal = 0., double maxVal = 0., double logstep = 1.)
+    // C++: static Ptr_ParamGrid cv::ml::ParamGrid::create(double minVal = 0., double maxVal = 0., double logstep = 1.)
     //
 
     //javadoc: ParamGrid::create(minVal, maxVal, logstep)
@@ -31,11 +31,29 @@ public class ParamGrid {
         return retVal;
     }
 
+    //javadoc: ParamGrid::create(minVal, maxVal)
+    public static ParamGrid create(double minVal, double maxVal)
+    {
+        
+        ParamGrid retVal = ParamGrid.__fromPtr__(create_1(minVal, maxVal));
+        
+        return retVal;
+    }
+
+    //javadoc: ParamGrid::create(minVal)
+    public static ParamGrid create(double minVal)
+    {
+        
+        ParamGrid retVal = ParamGrid.__fromPtr__(create_2(minVal));
+        
+        return retVal;
+    }
+
     //javadoc: ParamGrid::create()
     public static ParamGrid create()
     {
         
-        ParamGrid retVal = ParamGrid.__fromPtr__(create_1());
+        ParamGrid retVal = ParamGrid.__fromPtr__(create_3());
         
         return retVal;
     }
@@ -132,9 +150,11 @@ public class ParamGrid {
 
 
 
-    // C++: static Ptr_ParamGrid create(double minVal = 0., double maxVal = 0., double logstep = 1.)
+    // C++: static Ptr_ParamGrid cv::ml::ParamGrid::create(double minVal = 0., double maxVal = 0., double logstep = 1.)
     private static native long create_0(double minVal, double maxVal, double logstep);
-    private static native long create_1();
+    private static native long create_1(double minVal, double maxVal);
+    private static native long create_2(double minVal);
+    private static native long create_3();
 
     // C++: double ParamGrid::minVal
     private static native double get_minVal_0(long nativeObj);

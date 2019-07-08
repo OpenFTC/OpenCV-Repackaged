@@ -22,7 +22,7 @@ public class BOWTrainer {
     public static BOWTrainer __fromPtr__(long addr) { return new BOWTrainer(addr); }
 
     //
-    // C++:  Mat cluster(Mat descriptors)
+    // C++:  Mat cv::BOWTrainer::cluster(Mat descriptors)
     //
 
     //javadoc: BOWTrainer::cluster(descriptors)
@@ -36,7 +36,7 @@ public class BOWTrainer {
 
 
     //
-    // C++:  Mat cluster()
+    // C++:  Mat cv::BOWTrainer::cluster()
     //
 
     //javadoc: BOWTrainer::cluster()
@@ -50,7 +50,7 @@ public class BOWTrainer {
 
 
     //
-    // C++:  int descriptorsCount()
+    // C++:  int cv::BOWTrainer::descriptorsCount()
     //
 
     //javadoc: BOWTrainer::descriptorsCount()
@@ -64,7 +64,7 @@ public class BOWTrainer {
 
 
     //
-    // C++:  vector_Mat getDescriptors()
+    // C++:  vector_Mat cv::BOWTrainer::getDescriptors()
     //
 
     //javadoc: BOWTrainer::getDescriptors()
@@ -78,7 +78,7 @@ public class BOWTrainer {
 
 
     //
-    // C++:  void add(Mat descriptors)
+    // C++:  void cv::BOWTrainer::add(Mat descriptors)
     //
 
     //javadoc: BOWTrainer::add(descriptors)
@@ -92,7 +92,7 @@ public class BOWTrainer {
 
 
     //
-    // C++:  void clear()
+    // C++:  void cv::BOWTrainer::clear()
     //
 
     //javadoc: BOWTrainer::clear()
@@ -112,22 +112,22 @@ public class BOWTrainer {
 
 
 
-    // C++:  Mat cluster(Mat descriptors)
+    // C++:  Mat cv::BOWTrainer::cluster(Mat descriptors)
     private static native long cluster_0(long nativeObj, long descriptors_nativeObj);
 
-    // C++:  Mat cluster()
+    // C++:  Mat cv::BOWTrainer::cluster()
     private static native long cluster_1(long nativeObj);
 
-    // C++:  int descriptorsCount()
+    // C++:  int cv::BOWTrainer::descriptorsCount()
     private static native int descriptorsCount_0(long nativeObj);
 
-    // C++:  vector_Mat getDescriptors()
+    // C++:  vector_Mat cv::BOWTrainer::getDescriptors()
     private static native long getDescriptors_0(long nativeObj);
 
-    // C++:  void add(Mat descriptors)
+    // C++:  void cv::BOWTrainer::add(Mat descriptors)
     private static native void add_0(long nativeObj, long descriptors_nativeObj);
 
-    // C++:  void clear()
+    // C++:  void cv::BOWTrainer::clear()
     private static native void clear_0(long nativeObj);
 
     // native support for java finalize()

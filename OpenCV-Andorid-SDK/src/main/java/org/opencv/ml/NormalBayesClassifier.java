@@ -19,7 +19,7 @@ public class NormalBayesClassifier extends StatModel {
     public static NormalBayesClassifier __fromPtr__(long addr) { return new NormalBayesClassifier(addr); }
 
     //
-    // C++: static Ptr_NormalBayesClassifier create()
+    // C++: static Ptr_NormalBayesClassifier cv::ml::NormalBayesClassifier::create()
     //
 
     //javadoc: NormalBayesClassifier::create()
@@ -33,7 +33,7 @@ public class NormalBayesClassifier extends StatModel {
 
 
     //
-    // C++: static Ptr_NormalBayesClassifier load(String filepath, String nodeName = String())
+    // C++: static Ptr_NormalBayesClassifier cv::ml::NormalBayesClassifier::load(String filepath, String nodeName = String())
     //
 
     //javadoc: NormalBayesClassifier::load(filepath, nodeName)
@@ -56,7 +56,7 @@ public class NormalBayesClassifier extends StatModel {
 
 
     //
-    // C++:  float predictProb(Mat inputs, Mat& outputs, Mat& outputProbs, int flags = 0)
+    // C++:  float cv::ml::NormalBayesClassifier::predictProb(Mat inputs, Mat& outputs, Mat& outputProbs, int flags = 0)
     //
 
     //javadoc: NormalBayesClassifier::predictProb(inputs, outputs, outputProbs, flags)
@@ -85,14 +85,14 @@ public class NormalBayesClassifier extends StatModel {
 
 
 
-    // C++: static Ptr_NormalBayesClassifier create()
+    // C++: static Ptr_NormalBayesClassifier cv::ml::NormalBayesClassifier::create()
     private static native long create_0();
 
-    // C++: static Ptr_NormalBayesClassifier load(String filepath, String nodeName = String())
+    // C++: static Ptr_NormalBayesClassifier cv::ml::NormalBayesClassifier::load(String filepath, String nodeName = String())
     private static native long load_0(String filepath, String nodeName);
     private static native long load_1(String filepath);
 
-    // C++:  float predictProb(Mat inputs, Mat& outputs, Mat& outputProbs, int flags = 0)
+    // C++:  float cv::ml::NormalBayesClassifier::predictProb(Mat inputs, Mat& outputs, Mat& outputProbs, int flags = 0)
     private static native float predictProb_0(long nativeObj, long inputs_nativeObj, long outputs_nativeObj, long outputProbs_nativeObj, int flags);
     private static native float predictProb_1(long nativeObj, long inputs_nativeObj, long outputs_nativeObj, long outputProbs_nativeObj);
 

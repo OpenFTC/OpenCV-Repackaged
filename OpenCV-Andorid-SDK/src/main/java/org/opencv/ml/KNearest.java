@@ -17,13 +17,14 @@ public class KNearest extends StatModel {
     // internal usage only
     public static KNearest __fromPtr__(long addr) { return new KNearest(addr); }
 
+    // C++: enum Types
     public static final int
             BRUTE_FORCE = 1,
             KDTREE = 2;
 
 
     //
-    // C++: static Ptr_KNearest create()
+    // C++: static Ptr_KNearest cv::ml::KNearest::create()
     //
 
     //javadoc: KNearest::create()
@@ -37,7 +38,7 @@ public class KNearest extends StatModel {
 
 
     //
-    // C++:  bool getIsClassifier()
+    // C++:  bool cv::ml::KNearest::getIsClassifier()
     //
 
     //javadoc: KNearest::getIsClassifier()
@@ -51,7 +52,7 @@ public class KNearest extends StatModel {
 
 
     //
-    // C++:  float findNearest(Mat samples, int k, Mat& results, Mat& neighborResponses = Mat(), Mat& dist = Mat())
+    // C++:  float cv::ml::KNearest::findNearest(Mat samples, int k, Mat& results, Mat& neighborResponses = Mat(), Mat& dist = Mat())
     //
 
     //javadoc: KNearest::findNearest(samples, k, results, neighborResponses, dist)
@@ -63,18 +64,27 @@ public class KNearest extends StatModel {
         return retVal;
     }
 
+    //javadoc: KNearest::findNearest(samples, k, results, neighborResponses)
+    public  float findNearest(Mat samples, int k, Mat results, Mat neighborResponses)
+    {
+        
+        float retVal = findNearest_1(nativeObj, samples.nativeObj, k, results.nativeObj, neighborResponses.nativeObj);
+        
+        return retVal;
+    }
+
     //javadoc: KNearest::findNearest(samples, k, results)
     public  float findNearest(Mat samples, int k, Mat results)
     {
         
-        float retVal = findNearest_1(nativeObj, samples.nativeObj, k, results.nativeObj);
+        float retVal = findNearest_2(nativeObj, samples.nativeObj, k, results.nativeObj);
         
         return retVal;
     }
 
 
     //
-    // C++:  int getAlgorithmType()
+    // C++:  int cv::ml::KNearest::getAlgorithmType()
     //
 
     //javadoc: KNearest::getAlgorithmType()
@@ -88,7 +98,7 @@ public class KNearest extends StatModel {
 
 
     //
-    // C++:  int getDefaultK()
+    // C++:  int cv::ml::KNearest::getDefaultK()
     //
 
     //javadoc: KNearest::getDefaultK()
@@ -102,7 +112,7 @@ public class KNearest extends StatModel {
 
 
     //
-    // C++:  int getEmax()
+    // C++:  int cv::ml::KNearest::getEmax()
     //
 
     //javadoc: KNearest::getEmax()
@@ -116,7 +126,7 @@ public class KNearest extends StatModel {
 
 
     //
-    // C++:  void setAlgorithmType(int val)
+    // C++:  void cv::ml::KNearest::setAlgorithmType(int val)
     //
 
     //javadoc: KNearest::setAlgorithmType(val)
@@ -130,7 +140,7 @@ public class KNearest extends StatModel {
 
 
     //
-    // C++:  void setDefaultK(int val)
+    // C++:  void cv::ml::KNearest::setDefaultK(int val)
     //
 
     //javadoc: KNearest::setDefaultK(val)
@@ -144,7 +154,7 @@ public class KNearest extends StatModel {
 
 
     //
-    // C++:  void setEmax(int val)
+    // C++:  void cv::ml::KNearest::setEmax(int val)
     //
 
     //javadoc: KNearest::setEmax(val)
@@ -158,7 +168,7 @@ public class KNearest extends StatModel {
 
 
     //
-    // C++:  void setIsClassifier(bool val)
+    // C++:  void cv::ml::KNearest::setIsClassifier(bool val)
     //
 
     //javadoc: KNearest::setIsClassifier(val)
@@ -178,35 +188,36 @@ public class KNearest extends StatModel {
 
 
 
-    // C++: static Ptr_KNearest create()
+    // C++: static Ptr_KNearest cv::ml::KNearest::create()
     private static native long create_0();
 
-    // C++:  bool getIsClassifier()
+    // C++:  bool cv::ml::KNearest::getIsClassifier()
     private static native boolean getIsClassifier_0(long nativeObj);
 
-    // C++:  float findNearest(Mat samples, int k, Mat& results, Mat& neighborResponses = Mat(), Mat& dist = Mat())
+    // C++:  float cv::ml::KNearest::findNearest(Mat samples, int k, Mat& results, Mat& neighborResponses = Mat(), Mat& dist = Mat())
     private static native float findNearest_0(long nativeObj, long samples_nativeObj, int k, long results_nativeObj, long neighborResponses_nativeObj, long dist_nativeObj);
-    private static native float findNearest_1(long nativeObj, long samples_nativeObj, int k, long results_nativeObj);
+    private static native float findNearest_1(long nativeObj, long samples_nativeObj, int k, long results_nativeObj, long neighborResponses_nativeObj);
+    private static native float findNearest_2(long nativeObj, long samples_nativeObj, int k, long results_nativeObj);
 
-    // C++:  int getAlgorithmType()
+    // C++:  int cv::ml::KNearest::getAlgorithmType()
     private static native int getAlgorithmType_0(long nativeObj);
 
-    // C++:  int getDefaultK()
+    // C++:  int cv::ml::KNearest::getDefaultK()
     private static native int getDefaultK_0(long nativeObj);
 
-    // C++:  int getEmax()
+    // C++:  int cv::ml::KNearest::getEmax()
     private static native int getEmax_0(long nativeObj);
 
-    // C++:  void setAlgorithmType(int val)
+    // C++:  void cv::ml::KNearest::setAlgorithmType(int val)
     private static native void setAlgorithmType_0(long nativeObj, int val);
 
-    // C++:  void setDefaultK(int val)
+    // C++:  void cv::ml::KNearest::setDefaultK(int val)
     private static native void setDefaultK_0(long nativeObj, int val);
 
-    // C++:  void setEmax(int val)
+    // C++:  void cv::ml::KNearest::setEmax(int val)
     private static native void setEmax_0(long nativeObj, int val);
 
-    // C++:  void setIsClassifier(bool val)
+    // C++:  void cv::ml::KNearest::setIsClassifier(bool val)
     private static native void setIsClassifier_0(long nativeObj, boolean val);
 
     // native support for java finalize()

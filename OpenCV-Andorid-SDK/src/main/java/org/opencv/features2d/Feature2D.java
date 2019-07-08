@@ -22,7 +22,7 @@ public class Feature2D extends Algorithm {
     public static Feature2D __fromPtr__(long addr) { return new Feature2D(addr); }
 
     //
-    // C++:  String getDefaultName()
+    // C++:  String cv::Feature2D::getDefaultName()
     //
 
     //javadoc: Feature2D::getDefaultName()
@@ -36,7 +36,7 @@ public class Feature2D extends Algorithm {
 
 
     //
-    // C++:  bool empty()
+    // C++:  bool cv::Feature2D::empty()
     //
 
     //javadoc: Feature2D::empty()
@@ -50,7 +50,7 @@ public class Feature2D extends Algorithm {
 
 
     //
-    // C++:  int defaultNorm()
+    // C++:  int cv::Feature2D::defaultNorm()
     //
 
     //javadoc: Feature2D::defaultNorm()
@@ -64,7 +64,7 @@ public class Feature2D extends Algorithm {
 
 
     //
-    // C++:  int descriptorSize()
+    // C++:  int cv::Feature2D::descriptorSize()
     //
 
     //javadoc: Feature2D::descriptorSize()
@@ -78,7 +78,7 @@ public class Feature2D extends Algorithm {
 
 
     //
-    // C++:  int descriptorType()
+    // C++:  int cv::Feature2D::descriptorType()
     //
 
     //javadoc: Feature2D::descriptorType()
@@ -92,7 +92,7 @@ public class Feature2D extends Algorithm {
 
 
     //
-    // C++:  void compute(Mat image, vector_KeyPoint& keypoints, Mat& descriptors)
+    // C++:  void cv::Feature2D::compute(Mat image, vector_KeyPoint& keypoints, Mat& descriptors)
     //
 
     //javadoc: Feature2D::compute(image, keypoints, descriptors)
@@ -106,7 +106,7 @@ public class Feature2D extends Algorithm {
 
 
     //
-    // C++:  void compute(vector_Mat images, vector_vector_KeyPoint& keypoints, vector_Mat& descriptors)
+    // C++:  void cv::Feature2D::compute(vector_Mat images, vector_vector_KeyPoint& keypoints, vector_Mat& descriptors)
     //
 
     //javadoc: Feature2D::compute(images, keypoints, descriptors)
@@ -126,7 +126,7 @@ public class Feature2D extends Algorithm {
 
 
     //
-    // C++:  void detect(Mat image, vector_KeyPoint& keypoints, Mat mask = Mat())
+    // C++:  void cv::Feature2D::detect(Mat image, vector_KeyPoint& keypoints, Mat mask = Mat())
     //
 
     //javadoc: Feature2D::detect(image, keypoints, mask)
@@ -149,7 +149,7 @@ public class Feature2D extends Algorithm {
 
 
     //
-    // C++:  void detect(vector_Mat images, vector_vector_KeyPoint& keypoints, vector_Mat masks = vector_Mat())
+    // C++:  void cv::Feature2D::detect(vector_Mat images, vector_vector_KeyPoint& keypoints, vector_Mat masks = vector_Mat())
     //
 
     //javadoc: Feature2D::detect(images, keypoints, masks)
@@ -177,7 +177,7 @@ public class Feature2D extends Algorithm {
 
 
     //
-    // C++:  void detectAndCompute(Mat image, Mat mask, vector_KeyPoint& keypoints, Mat& descriptors, bool useProvidedKeypoints = false)
+    // C++:  void cv::Feature2D::detectAndCompute(Mat image, Mat mask, vector_KeyPoint& keypoints, Mat& descriptors, bool useProvidedKeypoints = false)
     //
 
     //javadoc: Feature2D::detectAndCompute(image, mask, keypoints, descriptors, useProvidedKeypoints)
@@ -200,14 +200,14 @@ public class Feature2D extends Algorithm {
 
 
     //
-    // C++:  void read(FileNode arg1)
+    // C++:  void cv::Feature2D::read(FileNode arg1)
     //
 
     // Unknown type 'FileNode' (I), skipping the function
 
 
     //
-    // C++:  void read(String fileName)
+    // C++:  void cv::Feature2D::read(String fileName)
     //
 
     //javadoc: Feature2D::read(fileName)
@@ -221,14 +221,14 @@ public class Feature2D extends Algorithm {
 
 
     //
-    // C++:  void write(Ptr_FileStorage fs, String name = String())
+    // C++:  void cv::Feature2D::write(Ptr_FileStorage fs, String name = String())
     //
 
     // Unknown type 'Ptr_FileStorage' (I), skipping the function
 
 
     //
-    // C++:  void write(String fileName)
+    // C++:  void cv::Feature2D::write(String fileName)
     //
 
     //javadoc: Feature2D::write(fileName)
@@ -248,43 +248,43 @@ public class Feature2D extends Algorithm {
 
 
 
-    // C++:  String getDefaultName()
+    // C++:  String cv::Feature2D::getDefaultName()
     private static native String getDefaultName_0(long nativeObj);
 
-    // C++:  bool empty()
+    // C++:  bool cv::Feature2D::empty()
     private static native boolean empty_0(long nativeObj);
 
-    // C++:  int defaultNorm()
+    // C++:  int cv::Feature2D::defaultNorm()
     private static native int defaultNorm_0(long nativeObj);
 
-    // C++:  int descriptorSize()
+    // C++:  int cv::Feature2D::descriptorSize()
     private static native int descriptorSize_0(long nativeObj);
 
-    // C++:  int descriptorType()
+    // C++:  int cv::Feature2D::descriptorType()
     private static native int descriptorType_0(long nativeObj);
 
-    // C++:  void compute(Mat image, vector_KeyPoint& keypoints, Mat& descriptors)
+    // C++:  void cv::Feature2D::compute(Mat image, vector_KeyPoint& keypoints, Mat& descriptors)
     private static native void compute_0(long nativeObj, long image_nativeObj, long keypoints_mat_nativeObj, long descriptors_nativeObj);
 
-    // C++:  void compute(vector_Mat images, vector_vector_KeyPoint& keypoints, vector_Mat& descriptors)
+    // C++:  void cv::Feature2D::compute(vector_Mat images, vector_vector_KeyPoint& keypoints, vector_Mat& descriptors)
     private static native void compute_1(long nativeObj, long images_mat_nativeObj, long keypoints_mat_nativeObj, long descriptors_mat_nativeObj);
 
-    // C++:  void detect(Mat image, vector_KeyPoint& keypoints, Mat mask = Mat())
+    // C++:  void cv::Feature2D::detect(Mat image, vector_KeyPoint& keypoints, Mat mask = Mat())
     private static native void detect_0(long nativeObj, long image_nativeObj, long keypoints_mat_nativeObj, long mask_nativeObj);
     private static native void detect_1(long nativeObj, long image_nativeObj, long keypoints_mat_nativeObj);
 
-    // C++:  void detect(vector_Mat images, vector_vector_KeyPoint& keypoints, vector_Mat masks = vector_Mat())
+    // C++:  void cv::Feature2D::detect(vector_Mat images, vector_vector_KeyPoint& keypoints, vector_Mat masks = vector_Mat())
     private static native void detect_2(long nativeObj, long images_mat_nativeObj, long keypoints_mat_nativeObj, long masks_mat_nativeObj);
     private static native void detect_3(long nativeObj, long images_mat_nativeObj, long keypoints_mat_nativeObj);
 
-    // C++:  void detectAndCompute(Mat image, Mat mask, vector_KeyPoint& keypoints, Mat& descriptors, bool useProvidedKeypoints = false)
+    // C++:  void cv::Feature2D::detectAndCompute(Mat image, Mat mask, vector_KeyPoint& keypoints, Mat& descriptors, bool useProvidedKeypoints = false)
     private static native void detectAndCompute_0(long nativeObj, long image_nativeObj, long mask_nativeObj, long keypoints_mat_nativeObj, long descriptors_nativeObj, boolean useProvidedKeypoints);
     private static native void detectAndCompute_1(long nativeObj, long image_nativeObj, long mask_nativeObj, long keypoints_mat_nativeObj, long descriptors_nativeObj);
 
-    // C++:  void read(String fileName)
+    // C++:  void cv::Feature2D::read(String fileName)
     private static native void read_0(long nativeObj, String fileName);
 
-    // C++:  void write(String fileName)
+    // C++:  void cv::Feature2D::write(String fileName)
     private static native void write_0(long nativeObj, String fileName);
 
     // native support for java finalize()

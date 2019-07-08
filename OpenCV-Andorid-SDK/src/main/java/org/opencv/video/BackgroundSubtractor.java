@@ -17,7 +17,7 @@ public class BackgroundSubtractor extends Algorithm {
     public static BackgroundSubtractor __fromPtr__(long addr) { return new BackgroundSubtractor(addr); }
 
     //
-    // C++:  void apply(Mat image, Mat& fgmask, double learningRate = -1)
+    // C++:  void cv::BackgroundSubtractor::apply(Mat image, Mat& fgmask, double learningRate = -1)
     //
 
     //javadoc: BackgroundSubtractor::apply(image, fgmask, learningRate)
@@ -40,7 +40,7 @@ public class BackgroundSubtractor extends Algorithm {
 
 
     //
-    // C++:  void getBackgroundImage(Mat& backgroundImage)
+    // C++:  void cv::BackgroundSubtractor::getBackgroundImage(Mat& backgroundImage)
     //
 
     //javadoc: BackgroundSubtractor::getBackgroundImage(backgroundImage)
@@ -60,11 +60,11 @@ public class BackgroundSubtractor extends Algorithm {
 
 
 
-    // C++:  void apply(Mat image, Mat& fgmask, double learningRate = -1)
+    // C++:  void cv::BackgroundSubtractor::apply(Mat image, Mat& fgmask, double learningRate = -1)
     private static native void apply_0(long nativeObj, long image_nativeObj, long fgmask_nativeObj, double learningRate);
     private static native void apply_1(long nativeObj, long image_nativeObj, long fgmask_nativeObj);
 
-    // C++:  void getBackgroundImage(Mat& backgroundImage)
+    // C++:  void cv::BackgroundSubtractor::getBackgroundImage(Mat& backgroundImage)
     private static native void getBackgroundImage_0(long nativeObj, long backgroundImage_nativeObj);
 
     // native support for java finalize()
