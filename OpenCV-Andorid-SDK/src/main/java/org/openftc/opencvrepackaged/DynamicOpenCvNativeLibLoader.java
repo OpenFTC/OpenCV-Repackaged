@@ -43,6 +43,8 @@ import java.util.concurrent.CountDownLatch;
 public class DynamicOpenCvNativeLibLoader
 {
     private static final String NATIVE_LIB_MD5 = "83995833bd64b46a940e5eda8dafd620";
+    private static boolean alreadyLoaded = false;
+
     private File libInProtectedStorage;
     private File protectedExtraFolder;
     private File libOnSdcard;
@@ -52,11 +54,23 @@ public class DynamicOpenCvNativeLibLoader
     /*
      * By annotating this method with @OpModeRegistrar, it will be called
      * automatically by the SDK as it is scanning all the classes in the app
-     * (for @Teleop, etc.) on startup.
+     * (for @Teleop, etc.) while it is "starting" the robot.
      */
     @OpModeRegistrar
-    public static void loadNativeLibOnSdkBoot(Context context, AnnotatedOpModeManager manager)
+    public static void loadNativeLibOnStartRobot(Context context, AnnotatedOpModeManager manager)
     {
+        /*
+         * Because this is called every time the robot is "restarted" we
+         * check to see whether we've already previously done our job here.
+         */
+        if(alreadyLoaded)
+        {
+            /*
+             * Get out of dodge
+             */
+            return;
+        }
+
         DynamicOpenCvNativeLibLoader loader = new DynamicOpenCvNativeLibLoader();
         loader.setupOpenCVNativeLib();
 
@@ -71,6 +85,7 @@ public class DynamicOpenCvNativeLibLoader
              * so we will hang the RC app.
              */
             loader.nativeLibLoadedLatch.await();
+            alreadyLoaded = true;
         }
         catch (InterruptedException e)
         {
