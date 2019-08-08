@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 ext {
     PUBLISH_GROUP_ID = 'org.openftc'
     PUBLISH_ARTIFACT_ID = 'opencv-repackaged'
-    PUBLISH_VERSION = '4.1.0-test'
+    PUBLISH_VERSION = '4.1.0-A'
 }
 
 android {
