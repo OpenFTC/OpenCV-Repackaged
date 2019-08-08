@@ -27,7 +27,7 @@ To avoid the pain of having to download the OpenCV Android bundle, extract the J
 5. At the bottom, add this:
 
         dependencies {
-            compile 'org.openftc:opencv-repackaged:4.1.0-test'
+            compile 'org.openftc:opencv-repackaged:4.1.0-A'
          }
 
 6. Copy `libOpenCvNative.so` from the `/doc` folder of this repo into the `FIRST` folder on the internal storage of the Robot Controller
