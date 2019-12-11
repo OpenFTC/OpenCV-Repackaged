@@ -38,7 +38,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.concurrent.CountDownLatch;
 
 public class DynamicOpenCvNativeLibLoader
 {
@@ -49,7 +48,6 @@ public class DynamicOpenCvNativeLibLoader
     private File protectedExtraFolder;
     private File libOnSdcard;
     private Activity rcActivity;
-    private CountDownLatch nativeLibLoadedLatch = new CountDownLatch(1);
 
     /*
      * By annotating this method with @OpModeRegistrar, it will be called
@@ -73,24 +71,6 @@ public class DynamicOpenCvNativeLibLoader
 
         DynamicOpenCvNativeLibLoader loader = new DynamicOpenCvNativeLibLoader();
         loader.setupOpenCVNativeLib();
-
-        try
-        {
-            /*
-             * If the native library was successfully loaded,
-             * then this latch will have already been released
-             * and this statement will return instantly. However,
-             * If the attempt to load the library failed, then
-             * this latch will (intentionally) never release and
-             * so we will hang the RC app.
-             */
-            loader.nativeLibLoadedLatch.await();
-            alreadyLoaded = true;
-        }
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
     }
 
     @SuppressLint("UnsafeDynamicallyLoadedCode")
@@ -110,8 +90,7 @@ public class DynamicOpenCvNativeLibLoader
              * We've been given the go-ahead! Load up libVuforiaReal.so
              */
             System.load(libInProtectedStorage.getAbsolutePath());
-
-            nativeLibLoadedLatch.countDown();
+            alreadyLoaded = true;
         }
         catch (OpenCvNativeLibNotFoundException e)
         {
