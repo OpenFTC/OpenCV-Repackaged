@@ -116,12 +116,17 @@ public class DynamicOpenCvNativeLibLoader
         catch (OpenCvNativeLibNotFoundException e)
         {
             e.printStackTrace();
-            showLibNotOnSdcardDialog();
+            String dialogTitle = "libOpenCvNative.so not found";
+            String dialogMsg = "libOpenCvNative.so was not found. Please copy it to the FIRST folder on the internal storage.";
+            showErrorDialog(dialogTitle, dialogMsg);
         }
         catch (OpenCvNativeLibCorruptedException e)
         {
             e.printStackTrace();
-            showLibCorruptedDialog();
+            String dialogTitle = "libOpenCvNative.so corrupted";
+            String dialogMsg = "libOpenCvNative.so is present in the FIRST on the internal storage. However, the MD5 " +
+                               "checksum does not match what is expected. Delete and re-download the file.";
+            showErrorDialog(dialogTitle, dialogMsg);
         }
     }
 
@@ -191,18 +196,16 @@ public class DynamicOpenCvNativeLibLoader
         }
     }
 
-    private void showLibNotOnSdcardDialog()
+    private void showErrorDialog(final String title, final String message)
     {
         rcActivity.runOnUiThread(new Runnable()
         {
             @Override
             public void run()
             {
-                String msg = "libOpenCvNative.so was not found. Please copy it to the FIRST folder on the internal storage.";
-
                 AlertDialog dialog = new AlertDialog.Builder(rcActivity)
-                        .setTitle("libOpenCvNative.so not found!")
-                        .setMessage(msg)
+                        .setTitle(title)
+                        .setMessage(message)
                         .setCancelable(false)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener()
                         {
@@ -213,31 +216,6 @@ public class DynamicOpenCvNativeLibLoader
                             }
                         }).create();
                 dialog.show();
-            }
-        });
-    }
-
-    private void showLibCorruptedDialog()
-    {
-        rcActivity.runOnUiThread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                AlertDialog.Builder builder = new AlertDialog.Builder(rcActivity);
-                builder.setTitle("libOpenCvNative.so corrupted!");
-                builder.setMessage("libOpenCvNative.so is present in the FIRST on the internal storage. However, the MD5 " +
-                        "checksum does not match what is expected. Delete and re-download the file.");
-                builder.setCancelable(false);
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i)
-                    {
-                        System.exit(1);
-                    }
-                });
-                builder.show();
             }
         });
     }
