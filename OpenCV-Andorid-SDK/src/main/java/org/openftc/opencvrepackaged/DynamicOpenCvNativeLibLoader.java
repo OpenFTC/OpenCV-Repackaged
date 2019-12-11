@@ -30,6 +30,7 @@ import android.os.Environment;
 
 import com.qualcomm.robotcore.eventloop.opmode.AnnotatedOpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegistrar;
+import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
 
@@ -42,6 +43,7 @@ import java.io.OutputStream;
 public class DynamicOpenCvNativeLibLoader
 {
     private static final String NATIVE_LIB_MD5 = "83995833bd64b46a940e5eda8dafd620";
+    private static final String TAG = "OpenFTC-OpenCV-Repackaged-Loader";
     private static boolean alreadyLoaded = false;
 
     private File libInProtectedStorage;
@@ -94,14 +96,21 @@ public class DynamicOpenCvNativeLibLoader
         }
         catch (OpenCvNativeLibNotFoundException e)
         {
-            e.printStackTrace();
+            String globalWarningMessage = "libOpenCv.so was not found in the FIRST folder. OpenCV will not work"; // No period at the end, since a semicolon may be appended by the system
+            RobotLog.ee(TAG, e, globalWarningMessage);
+            RobotLog.setGlobalWarningMessage(globalWarningMessage);
+
             String dialogTitle = "libOpenCvNative.so not found";
             String dialogMsg = "libOpenCvNative.so was not found. Please copy it to the FIRST folder on the internal storage.";
             showErrorDialog(dialogTitle, dialogMsg);
         }
         catch (OpenCvNativeLibCorruptedException e)
         {
-            e.printStackTrace();
+            // No period at the end, since a semicolon may be appended by the system.
+            String globalWarningMessage = "The version of libOpenCv.so found in the FIRST folder has an incorrect checksum. OpenCV will not work";
+            RobotLog.ee(TAG, e, globalWarningMessage);
+            RobotLog.setGlobalWarningMessage(globalWarningMessage);
+
             String dialogTitle = "libOpenCvNative.so corrupted";
             String dialogMsg = "libOpenCvNative.so is present in the FIRST on the internal storage. However, the MD5 " +
                                "checksum does not match what is expected. Delete and re-download the file.";
