@@ -40,6 +40,10 @@ Unfortunately, due to a [known bug with OpenCV 4.x](https://github.com/opencv/op
 
 ## Changelog:
 
+#### v4.1.0-B
+
+ - Drastically improve error handling when loading native library
+
 #### v4.1.0-A
 
  - Initial release, based on OpenCV Android SDK v4.1.0
