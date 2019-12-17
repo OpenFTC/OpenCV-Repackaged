@@ -21,6 +21,5 @@
 
 package org.openftc.opencvrepackaged;
 
-public class OpenCvNativeLibCorruptedException extends Exception
-{
+public class CopyOpenCvNativeLibToProtectedStorageException extends Exception {
 }

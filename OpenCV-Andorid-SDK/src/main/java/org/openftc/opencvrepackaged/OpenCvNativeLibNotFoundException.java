@@ -21,6 +21,6 @@
 
 package org.openftc.opencvrepackaged;
 
-public class OpenCvNativeLibNotFoundException extends RuntimeException
+public class OpenCvNativeLibNotFoundException extends Exception
 {
 }

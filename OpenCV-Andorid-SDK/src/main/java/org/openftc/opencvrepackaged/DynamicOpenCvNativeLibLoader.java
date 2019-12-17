@@ -151,9 +151,21 @@ public class DynamicOpenCvNativeLibLoader
 
             showErrorDialog(dialogTitle, dialogMsg);
         }
+        catch (Exception | Error e)
+        {
+            // No period at the end, since a semicolon may be appended by the system.
+            String globalWarningMessage = "Error occurred while loading OpenCV native library! Any OpenCV-enabled OpModes will crash";
+            RobotLog.ee(TAG, e, globalWarningMessage);
+            RobotLog.setGlobalWarningMessage(globalWarningMessage);
+
+            String dialogTitle = "Error loading OpenCV native library";
+            String dialogMsg = "An error occurred while loading the OpenCV native library. Any OpenCV-enabled OpModes will crash.";
+
+            showErrorDialog(dialogTitle, dialogMsg);
+        }
     }
 
-    private void setupOpenCvFiles() throws OpenCvNativeLibNotFoundException, OpenCvNativeLibCorruptedException
+    private void setupOpenCvFiles() throws OpenCvNativeLibNotFoundException, OpenCvNativeLibCorruptedException, CopyOpenCvNativeLibToProtectedStorageException
     {
         libInProtectedStorage = new File(rcActivity.getFilesDir() + "/extra/libOpenCvNative.so");
         protectedExtraFolder = new File(rcActivity.getFilesDir() + "/extra/");
@@ -267,19 +279,19 @@ public class DynamicOpenCvNativeLibLoader
         }
     }
 
-    private void copyLibFromSdcardToProtectedStorage()
+    private void copyLibFromSdcardToProtectedStorage() throws CopyOpenCvNativeLibToProtectedStorageException
     {
-        /*
-         * Check if the 'extra' folder exists. If it doesn't,
-         * then create it now or else the copy code will crash
-         */
-        if(!protectedExtraFolder.exists())
-        {
-            protectedExtraFolder.mkdir();
-        }
-
         try
         {
+            /*
+             * Check if the 'extra' folder exists. If it doesn't,
+             * then create it now or else the copy code will crash
+             */
+            if(!protectedExtraFolder.exists())
+            {
+                protectedExtraFolder.mkdir();
+            }
+
             /*
              * Copy the file with a 1MiB buffer
              */
@@ -296,7 +308,7 @@ public class DynamicOpenCvNativeLibLoader
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            throw new CopyOpenCvNativeLibToProtectedStorageException();
         }
     }
 }
