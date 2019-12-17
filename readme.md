@@ -9,6 +9,10 @@ This is the OpenCV Java API, repackaged into an AAR that you can add as a Gradle
 To avoid the pain of having to download the OpenCV Android bundle, extract the Java library, and import it as a module in Android Studio. This bloats your git repository and makes it a pain to upgrade to a newer OpenCV version.
 **However, that's not even the biggest benefit of using this library!** To decrease the final APK size (and thus decreasing deployment time to your robot each time you make a code change), this library loads the C++ library required by OpenCV (more than 10MB!) dynamically from the internal storage instead of shipping it inside the APK.
 
+### Device compatibility:
+
+Unfortunately, due to a [known bug with OpenCV 4.x](https://github.com/opencv/opencv/issues/15389), OpenCV-Repackaged is only compatible with devices that run Andorid 5.0 or higher. For FTC, this means that it is incompatible with the ZTE Speed. OpenCV-Repackaged will work fine on all other FTC-legal devices (including the new Control Hub).
+
 ### So how do I use this?
 
 1. Open your FTC SDK Android Studio project

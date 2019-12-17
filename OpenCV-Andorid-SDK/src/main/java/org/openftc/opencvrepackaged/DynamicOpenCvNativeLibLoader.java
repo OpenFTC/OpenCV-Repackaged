@@ -26,6 +26,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Environment;
 
 import com.qualcomm.robotcore.eventloop.opmode.AnnotatedOpModeManager;
@@ -110,6 +111,23 @@ public class DynamicOpenCvNativeLibLoader
         onPeerConnectedRunnable = null;
 
         rcActivity = AppUtil.getInstance().getRootActivity();
+
+        /*
+         * OpenCV 4.x is not compatible with Android Versions below Lollipop
+         */
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+        {
+            // No period at the end, since a semicolon may be appended by the system
+            String globalWarningMessage = "Unfortunately, OpenCV 4.x is not compatible with Android versions below 5.0 Lollipop. Any OpenCV-enabled OpModes will crash";
+            RobotLog.ee(TAG, globalWarningMessage);
+            RobotLog.setGlobalWarningMessage(globalWarningMessage);
+
+            String dialogTitle = "This device is not compatible with OpenCV 4.x";
+            String dialogMsg = "Unfortunately, OpenCV 4.x is not compatible with Android versions below 5.0 Lollipop. Any OpenCV-enabled OpModes will crash.";
+
+            showErrorDialog(dialogTitle, dialogMsg);
+            return;
+        }
 
         try
         {
