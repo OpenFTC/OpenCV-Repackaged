@@ -30,9 +30,13 @@ import android.os.Environment;
 
 import com.qualcomm.robotcore.eventloop.opmode.AnnotatedOpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegistrar;
+import com.qualcomm.robotcore.hardware.configuration.LynxConstants;
 import com.qualcomm.robotcore.util.RobotLog;
 
+import org.firstinspires.ftc.robotcore.internal.network.NetworkConnectionHandler;
+import org.firstinspires.ftc.robotcore.internal.network.PeerStatusCallback;
 import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
+import org.firstinspires.ftc.robotcore.internal.ui.UILocation;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -45,11 +49,36 @@ public class DynamicOpenCvNativeLibLoader
     private static final String NATIVE_LIB_MD5 = "83995833bd64b46a940e5eda8dafd620";
     private static final String TAG = "OpenFTC-OpenCV-Repackaged-Loader";
     private static boolean alreadyLoaded = false;
+    private static Runnable onPeerConnectedRunnable = null;
 
     private File libInProtectedStorage;
     private File protectedExtraFolder;
     private File libOnSdcard;
     private Activity rcActivity;
+
+    static
+    {
+        if(LynxConstants.isRevControlHub())
+        {
+            NetworkConnectionHandler.getInstance().registerPeerStatusCallback(new PeerStatusCallback()
+            {
+                @Override
+                public void onPeerConnected()
+                {
+                    if(onPeerConnectedRunnable != null)
+                    {
+                        onPeerConnectedRunnable.run();
+                    }
+                }
+
+                @Override
+                public void onPeerDisconnected()
+                {
+
+                }
+            });
+        }
+    }
 
     /*
      * By annotating this method with @OpModeRegistrar, it will be called
@@ -78,6 +107,8 @@ public class DynamicOpenCvNativeLibLoader
     @SuppressLint("UnsafeDynamicallyLoadedCode")
     private void setupOpenCVNativeLib()
     {
+        onPeerConnectedRunnable = null;
+
         rcActivity = AppUtil.getInstance().getRootActivity();
 
         try
@@ -96,24 +127,28 @@ public class DynamicOpenCvNativeLibLoader
         }
         catch (OpenCvNativeLibNotFoundException e)
         {
-            String globalWarningMessage = "libOpenCv.so was not found in the FIRST folder. OpenCV will not work"; // No period at the end, since a semicolon may be appended by the system
+            // No period at the end, since a semicolon may be appended by the system
+            String globalWarningMessage = "libOpenCvNative.so was not found, any OpenCV-enabled OpModes will crash. Please copy it to the FIRST folder on the internal storage";
             RobotLog.ee(TAG, e, globalWarningMessage);
             RobotLog.setGlobalWarningMessage(globalWarningMessage);
 
             String dialogTitle = "libOpenCvNative.so not found";
-            String dialogMsg = "libOpenCvNative.so was not found. Please copy it to the FIRST folder on the internal storage.";
+            String dialogMsg = "libOpenCvNative.so was not found, any OpenCV-enabled OpModes will crash. Please copy it to the FIRST folder on the internal storage.";
+
             showErrorDialog(dialogTitle, dialogMsg);
         }
         catch (OpenCvNativeLibCorruptedException e)
         {
             // No period at the end, since a semicolon may be appended by the system.
-            String globalWarningMessage = "The version of libOpenCv.so found in the FIRST folder has an incorrect checksum. OpenCV will not work";
+            String globalWarningMessage = "libOpenCvNative.so is present in the FIRST on the internal storage. However, the MD5 " +
+                    "checksum does not match what is expected. Any OpenCV-enabled OpModes will likely crash. Delete and re-download the file";
             RobotLog.ee(TAG, e, globalWarningMessage);
             RobotLog.setGlobalWarningMessage(globalWarningMessage);
 
             String dialogTitle = "libOpenCvNative.so corrupted";
             String dialogMsg = "libOpenCvNative.so is present in the FIRST on the internal storage. However, the MD5 " +
-                               "checksum does not match what is expected. Delete and re-download the file.";
+                               "checksum does not match what is expected. Any OpenCV-enabled OpModes will likely crash. Delete and re-download the file.";
+
             showErrorDialog(dialogTitle, dialogMsg);
         }
     }
@@ -186,26 +221,50 @@ public class DynamicOpenCvNativeLibLoader
 
     private void showErrorDialog(final String title, final String message)
     {
-        rcActivity.runOnUiThread(new Runnable()
+        if(LynxConstants.isRevControlHub())
         {
-            @Override
-            public void run()
+            //If robocol isn't linked yet, register the dialog for later
+            if(!NetworkConnectionHandler.getInstance().isPeerConnected())
             {
-                AlertDialog dialog = new AlertDialog.Builder(rcActivity)
-                        .setTitle(title)
-                        .setMessage(message)
-                        .setCancelable(false)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener()
-                        {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i)
-                            {
-                                System.exit(1);
-                            }
-                        }).create();
-                dialog.show();
+                onPeerConnectedRunnable = new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        AppUtil.getInstance().showAlertDialog(UILocation.BOTH, title, message);
+                    }
+                };
             }
-        });
+
+            //Robocol is linked, show dialog now
+            else
+            {
+                AppUtil.getInstance().showAlertDialog(UILocation.BOTH, title, message);
+            }
+        }
+        else
+        {
+            rcActivity.runOnUiThread(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    AlertDialog dialog = new AlertDialog.Builder(rcActivity)
+                            .setTitle(title)
+                            .setMessage(message)
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener()
+                            {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i)
+                                {
+                                    System.exit(1);
+                                }
+                            }).create();
+                    dialog.show();
+                }
+            });
+        }
     }
 
     private void copyLibFromSdcardToProtectedStorage()
