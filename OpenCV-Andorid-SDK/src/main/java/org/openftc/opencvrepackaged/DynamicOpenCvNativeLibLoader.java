@@ -120,7 +120,7 @@ public class DynamicOpenCvNativeLibLoader
             setupOpenCvFiles(false);
 
             /*
-             * We've been given the go-ahead! Load up libVuforiaReal.so
+             * We've been given the go-ahead! Load up libOpenCvNative.so
              */
             System.load(libInProtectedStorage.getAbsolutePath());
             alreadyLoaded = true;
