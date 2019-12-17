@@ -31,7 +31,7 @@ Unfortunately, due to a [known bug with OpenCV 4.x](https://github.com/opencv/op
 5. At the bottom, add this:
 
         dependencies {
-            implementation 'org.openftc:opencv-repackaged:4.1.0-A'
+            implementation 'org.openftc:opencv-repackaged:4.1.0-B'
          }
 
 6. Copy `libOpenCvNative.so` from the `/doc` folder of this repo into the `FIRST` folder on the internal storage of the Robot Controller
