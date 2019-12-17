@@ -117,7 +117,7 @@ public class DynamicOpenCvNativeLibLoader
              * Attempt to set up the OpenCV library for loading in
              * the next statement
              */
-            setupOpenCvFiles();
+            setupOpenCvFiles(false);
 
             /*
              * We've been given the go-ahead! Load up libVuforiaReal.so
@@ -165,7 +165,7 @@ public class DynamicOpenCvNativeLibLoader
         }
     }
 
-    private void setupOpenCvFiles() throws OpenCvNativeLibNotFoundException, OpenCvNativeLibCorruptedException, CopyOpenCvNativeLibToProtectedStorageException
+    private void setupOpenCvFiles(boolean forceCopy) throws OpenCvNativeLibNotFoundException, OpenCvNativeLibCorruptedException, CopyOpenCvNativeLibToProtectedStorageException
     {
         libInProtectedStorage = new File(rcActivity.getFilesDir() + "/extra/libOpenCvNative.so");
         protectedExtraFolder = new File(rcActivity.getFilesDir() + "/extra/");
@@ -174,7 +174,7 @@ public class DynamicOpenCvNativeLibLoader
         /*
          * First, check to see if it exists in the protected storage
          */
-        if(!libInProtectedStorage.exists())
+        if((!libInProtectedStorage.exists()) || forceCopy)
         {
             /*
              * Ok, so it's not in the protected storage. Check if it exists
@@ -226,7 +226,7 @@ public class DynamicOpenCvNativeLibLoader
              */
             if(!MD5.checkMD5(NATIVE_LIB_MD5, libInProtectedStorage))
             {
-                throw new OpenCvNativeLibCorruptedException();
+                setupOpenCvFiles(true);
             }
         }
     }
