@@ -34,7 +34,7 @@ Unfortunately, due to a [known bug with OpenCV 4.x](https://github.com/opencv/op
             implementation 'org.openftc:opencv-repackaged:4.1.0-B'
          }
 
-6. Copy `libOpenCvNative.so` from the `/doc` folder of this repo into the `FIRST` folder on the internal storage of the Robot Controller
+6. Copy `libOpenCvNative.so` from the `/doc` folder of this repo into the `FIRST` folder on the USB storage of the Robot Controller (i.e. connect the Robot Controller to your computer with a USB cable, put it into MTP mode, and drag 'n drop the file).
 
 7. You can now use OpenCV just as you would as if you had manually imported the module, with one minor difference being you do **not** need to call any methods such as `OpenCVLoader.initDebug()` because the native library is automatically loaded in the background when the SDK boots.
 
