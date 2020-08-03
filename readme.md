@@ -40,6 +40,10 @@ Unfortunately, due to a [known bug with OpenCV 4.x](https://github.com/opencv/op
 
 ## Changelog:
 
+#### v4.1.0-C
+
+ - Specifically handle error case of failure to load 32-bit library when FTC Robot Controller app has already loaded another native library as 64-bit
+
 #### v4.1.0-B
 
  - Drastically improve error handling when loading native library
