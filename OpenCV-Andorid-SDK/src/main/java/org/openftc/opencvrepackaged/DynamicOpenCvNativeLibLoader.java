@@ -171,15 +171,30 @@ public class DynamicOpenCvNativeLibLoader
         }
         catch (Exception | Error e)
         {
-            // No period at the end, since a semicolon may be appended by the system.
-            String globalWarningMessage = "Error occurred while loading OpenCV native library! Any OpenCV-enabled OpModes will crash";
-            RobotLog.ee(TAG, e, globalWarningMessage);
-            RobotLog.setGlobalWarningMessage(globalWarningMessage);
+            if(e instanceof UnsatisfiedLinkError && ((UnsatisfiedLinkError) e).getMessage().contains("32-bit instead of 64-bit"))
+            {
+                // No period at the end, since a semicolon may be appended by the system.
+                String globalWarningMessage = "Could not load OpenCV native library because app is running in 64-bit mode. Please remove the arm64-v8a entries from build.common.gradle.";
+                RobotLog.ee(TAG, e, globalWarningMessage);
+                RobotLog.setGlobalWarningMessage(globalWarningMessage);
 
-            String dialogTitle = "Error loading OpenCV native library";
-            String dialogMsg = "An error occurred while loading the OpenCV native library. Any OpenCV-enabled OpModes will crash.";
+                String dialogTitle = "Failed to load OpenCV native library";
+                String dialogMsg = "The OpenCV native library could not be loaded because the app is running in 64-bit mode. Please remove the arm64-v8a entries from build.common.gradle. Any OpenCV-enabled OpModes will crash.";
 
-            showErrorDialog(dialogTitle, dialogMsg);
+                showErrorDialog(dialogTitle, dialogMsg);
+            }
+            else
+            {
+                // No period at the end, since a semicolon may be appended by the system.
+                String globalWarningMessage = "Error occurred while loading OpenCV native library! Any OpenCV-enabled OpModes will crash";
+                RobotLog.ee(TAG, e, globalWarningMessage);
+                RobotLog.setGlobalWarningMessage(globalWarningMessage);
+
+                String dialogTitle = "Error loading OpenCV native library";
+                String dialogMsg = "An error occurred while loading the OpenCV native library. Any OpenCV-enabled OpModes will crash.";
+
+                showErrorDialog(dialogTitle, dialogMsg);
+            }
         }
     }
 
