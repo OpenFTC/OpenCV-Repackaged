@@ -29,7 +29,7 @@ android {
 }
 
 dependencies {
-    compileOnly 'org.openftc:robotcore-stock:5.0'
+    compileOnly 'org.firstinspires.ftc:RobotCore:6.2.1'
 }
 
 apply from: '../release-aar.gradle'
