@@ -4,6 +4,11 @@ ext {
     PUBLISH_GROUP_ID = 'org.openftc'
     PUBLISH_ARTIFACT_ID = 'opencv-repackaged'
     PUBLISH_VERSION = '4.1.0-C'
+
+    PUBLISH_DESC = 'OpenCV Repackaged'
+    PUBLISH_URL = 'https://github.com/OpenFTC/OpenCV-Repackaged'
+    PUBLISH_VCS_URL = 'https://github.com/OpenFTC/OpenCV-Repackaged/tree/master'
+    PUBLISH_VCS_CONNECTION = 'scm:git:github.com/OpenFTC/OpenCV-Repackaged.git'
 }
 
 android {
@@ -32,4 +37,4 @@ dependencies {
     compileOnly 'org.firstinspires.ftc:RobotCore:6.2.1'
 }
 
-apply from: '../release-aar.gradle'
+apply from: '../sonatype-publish.gradle'
