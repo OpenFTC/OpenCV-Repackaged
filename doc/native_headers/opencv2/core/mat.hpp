@@ -151,7 +151,7 @@ number of components (vectors/matrices) of the outer vector.
 
 In general, type support is limited to cv::Mat types. Other types are forbidden.
 But in some cases we need to support passing of custom non-general Mat types, like arrays of cv::KeyPoint, cv::DMatch, etc.
-This data is not intented to be interpreted as an image data, or processed somehow like regular cv::Mat.
+This data is not intended to be interpreted as an image data, or processed somehow like regular cv::Mat.
 To pass such custom type use rawIn() / rawOut() / rawInOut() wrappers.
 Custom type is wrapped as Mat-compatible `CV_8UC<N>` values (N = sizeof(T), N <= CV_CN_MAX).
  */
@@ -170,7 +170,9 @@ public:
         STD_VECTOR        = 3 << KIND_SHIFT,
         STD_VECTOR_VECTOR = 4 << KIND_SHIFT,
         STD_VECTOR_MAT    = 5 << KIND_SHIFT,
-        EXPR              = 6 << KIND_SHIFT,
+#if OPENCV_ABI_COMPATIBILITY < 500
+        EXPR              = 6 << KIND_SHIFT,  //!< removed: https://github.com/opencv/opencv/pull/17046
+#endif
         OPENGL_BUFFER     = 7 << KIND_SHIFT,
         CUDA_HOST_MEM     = 8 << KIND_SHIFT,
         CUDA_GPU_MAT      = 9 << KIND_SHIFT,
@@ -178,7 +180,9 @@ public:
         STD_VECTOR_UMAT   =11 << KIND_SHIFT,
         STD_BOOL_VECTOR   =12 << KIND_SHIFT,
         STD_VECTOR_CUDA_GPU_MAT = 13 << KIND_SHIFT,
-        STD_ARRAY         =14 << KIND_SHIFT,
+#if OPENCV_ABI_COMPATIBILITY < 500
+        STD_ARRAY         =14 << KIND_SHIFT,  //!< removed: https://github.com/opencv/opencv/issues/18897
+#endif
         STD_ARRAY_MAT     =15 << KIND_SHIFT
     };
 
@@ -372,6 +376,9 @@ public:
 
     void assign(const std::vector<UMat>& v) const;
     void assign(const std::vector<Mat>& v) const;
+
+    void move(UMat& u) const;
+    void move(Mat& m) const;
 };
 
 
@@ -562,30 +569,31 @@ struct CV_EXPORTS UMatData
     int allocatorFlags_;
     int mapcount;
     UMatData* originalUMatData;
+    std::shared_ptr<void> allocatorContext;
 };
 CV_ENUM_FLAGS(UMatData::MemoryFlag)
 
 
 struct CV_EXPORTS MatSize
 {
-    explicit MatSize(int* _p);
-    int dims() const;
+    explicit MatSize(int* _p) CV_NOEXCEPT;
+    int dims() const CV_NOEXCEPT;
     Size operator()() const;
     const int& operator[](int i) const;
     int& operator[](int i);
-    operator const int*() const;  // TODO OpenCV 4.0: drop this
-    bool operator == (const MatSize& sz) const;
-    bool operator != (const MatSize& sz) const;
+    operator const int*() const CV_NOEXCEPT;  // TODO OpenCV 4.0: drop this
+    bool operator == (const MatSize& sz) const CV_NOEXCEPT;
+    bool operator != (const MatSize& sz) const CV_NOEXCEPT;
 
     int* p;
 };
 
 struct CV_EXPORTS MatStep
 {
-    MatStep();
-    explicit MatStep(size_t s);
-    const size_t& operator[](int i) const;
-    size_t& operator[](int i);
+    MatStep() CV_NOEXCEPT;
+    explicit MatStep(size_t s) CV_NOEXCEPT;
+    const size_t& operator[](int i) const CV_NOEXCEPT;
+    size_t& operator[](int i) CV_NOEXCEPT;
     operator size_t() const;
     MatStep& operator = (size_t s);
 
@@ -690,11 +698,16 @@ sub-matrices.
     -# Process "foreign" data using OpenCV (for example, when you implement a DirectShow\* filter or
     a processing module for gstreamer, and so on). For example:
     @code
-        void process_video_frame(const unsigned char* pixels,
-                                 int width, int height, int step)
+        Mat process_video_frame(const unsigned char* pixels,
+                                int width, int height, int step)
         {
-            Mat img(height, width, CV_8UC3, pixels, step);
-            GaussianBlur(img, img, Size(7,7), 1.5, 1.5);
+            // wrap input buffer
+            Mat img(height, width, CV_8UC3, (unsigned char*)pixels, step);
+
+            Mat result;
+            GaussianBlur(img, result, Size(7, 7), 1.5, 1.5);
+
+            return result;
         }
     @endcode
     -# Quickly initialize small matrices and/or get a super-fast element access.
@@ -794,7 +807,7 @@ public:
     The constructed matrix can further be assigned to another matrix or matrix expression or can be
     allocated with Mat::create . In the former case, the old content is de-referenced.
      */
-    Mat();
+    Mat() CV_NOEXCEPT;
 
     /** @overload
     @param rows Number of rows in a 2D array.
@@ -1998,6 +2011,11 @@ public:
     template<typename _Tp> MatIterator_<_Tp> begin();
     template<typename _Tp> MatConstIterator_<_Tp> begin() const;
 
+    /** @brief Same as begin() but for inverse traversal
+     */
+    template<typename _Tp> std::reverse_iterator<MatIterator_<_Tp>> rbegin();
+    template<typename _Tp> std::reverse_iterator<MatConstIterator_<_Tp>> rbegin() const;
+
     /** @brief Returns the matrix iterator and sets it to the after-last matrix element.
 
     The methods return the matrix read-only or read-write iterators, set to the point following the last
@@ -2005,6 +2023,12 @@ public:
      */
     template<typename _Tp> MatIterator_<_Tp> end();
     template<typename _Tp> MatConstIterator_<_Tp> end() const;
+
+    /** @brief Same as end() but for inverse traversal
+     */
+    template<typename _Tp> std::reverse_iterator< MatIterator_<_Tp>> rend();
+    template<typename _Tp> std::reverse_iterator< MatConstIterator_<_Tp>> rend() const;
+
 
     /** @brief Runs the given functor over all matrix elements in parallel.
 
@@ -2180,7 +2204,7 @@ public:
     typedef MatConstIterator_<_Tp> const_iterator;
 
     //! default constructor
-    Mat_();
+    Mat_() CV_NOEXCEPT;
     //! equivalent to Mat(_rows, _cols, DataType<_Tp>::type)
     Mat_(int _rows, int _cols);
     //! constructor that sets each matrix element to specified value
@@ -2236,6 +2260,12 @@ public:
     iterator end();
     const_iterator begin() const;
     const_iterator end() const;
+
+    //reverse iterators
+    std::reverse_iterator<iterator> rbegin();
+    std::reverse_iterator<iterator> rend();
+    std::reverse_iterator<const_iterator> rbegin() const;
+    std::reverse_iterator<const_iterator> rend() const;
 
     //! template methods for for operation over all matrix elements.
     // the operations take care of skipping gaps in the end of rows (if any)
@@ -2372,12 +2402,12 @@ class CV_EXPORTS UMat
 {
 public:
     //! default constructor
-    UMat(UMatUsageFlags usageFlags = USAGE_DEFAULT);
+    UMat(UMatUsageFlags usageFlags = USAGE_DEFAULT) CV_NOEXCEPT;
     //! constructs 2D matrix of the specified size and type
     // (_type is CV_8UC1, CV_64FC3, CV_32SC(12) etc.)
     UMat(int rows, int cols, int type, UMatUsageFlags usageFlags = USAGE_DEFAULT);
     UMat(Size size, int type, UMatUsageFlags usageFlags = USAGE_DEFAULT);
-    //! constucts 2D matrix and fills it with the specified value _s.
+    //! constructs 2D matrix and fills it with the specified value _s.
     UMat(int rows, int cols, int type, const Scalar& s, UMatUsageFlags usageFlags = USAGE_DEFAULT);
     UMat(Size size, int type, const Scalar& s, UMatUsageFlags usageFlags = USAGE_DEFAULT);
 
@@ -2393,19 +2423,10 @@ public:
     UMat(const UMat& m, const Rect& roi);
     UMat(const UMat& m, const Range* ranges);
     UMat(const UMat& m, const std::vector<Range>& ranges);
+
+    // FIXIT copyData=false is not implemented, drop this in favor of cv::Mat (OpenCV 5.0)
     //! builds matrix from std::vector with or without copying the data
     template<typename _Tp> explicit UMat(const std::vector<_Tp>& vec, bool copyData=false);
-
-    //! builds matrix from cv::Vec; the data is copied by default
-    template<typename _Tp, int n> explicit UMat(const Vec<_Tp, n>& vec, bool copyData=true);
-    //! builds matrix from cv::Matx; the data is copied by default
-    template<typename _Tp, int m, int n> explicit UMat(const Matx<_Tp, m, n>& mtx, bool copyData=true);
-    //! builds matrix from a 2D point
-    template<typename _Tp> explicit UMat(const Point_<_Tp>& pt, bool copyData=true);
-    //! builds matrix from a 3D point
-    template<typename _Tp> explicit UMat(const Point3_<_Tp>& pt, bool copyData=true);
-    //! builds matrix from comma initializer
-    template<typename _Tp> explicit UMat(const MatCommaInitializer_<_Tp>& commaInitializer);
 
     //! destructor - calls release()
     ~UMat();
@@ -2430,7 +2451,8 @@ public:
     //!  <0 - a diagonal from the lower half)
     UMat diag(int d=0) const;
     //! constructs a square diagonal matrix which main diagonal is vector "d"
-    static UMat diag(const UMat& d);
+    static UMat diag(const UMat& d, UMatUsageFlags usageFlags /*= USAGE_DEFAULT*/);
+    static UMat diag(const UMat& d) { return diag(d, USAGE_DEFAULT); }  // OpenCV 5.0: remove abi compatibility overload
 
     //! returns deep copy of the matrix, i.e. the data is copied
     UMat clone() const CV_NODISCARD;
@@ -2464,14 +2486,22 @@ public:
     double dot(InputArray m) const;
 
     //! Matlab-style matrix initialization
-    static UMat zeros(int rows, int cols, int type);
-    static UMat zeros(Size size, int type);
-    static UMat zeros(int ndims, const int* sz, int type);
-    static UMat ones(int rows, int cols, int type);
-    static UMat ones(Size size, int type);
-    static UMat ones(int ndims, const int* sz, int type);
-    static UMat eye(int rows, int cols, int type);
-    static UMat eye(Size size, int type);
+    static UMat zeros(int rows, int cols, int type, UMatUsageFlags usageFlags /*= USAGE_DEFAULT*/);
+    static UMat zeros(Size size, int type, UMatUsageFlags usageFlags /*= USAGE_DEFAULT*/);
+    static UMat zeros(int ndims, const int* sz, int type, UMatUsageFlags usageFlags /*= USAGE_DEFAULT*/);
+    static UMat zeros(int rows, int cols, int type) { return zeros(rows, cols, type, USAGE_DEFAULT); }  // OpenCV 5.0: remove abi compatibility overload
+    static UMat zeros(Size size, int type) { return zeros(size, type, USAGE_DEFAULT); }  // OpenCV 5.0: remove abi compatibility overload
+    static UMat zeros(int ndims, const int* sz, int type) { return zeros(ndims, sz, type, USAGE_DEFAULT); }  // OpenCV 5.0: remove abi compatibility overload
+    static UMat ones(int rows, int cols, int type, UMatUsageFlags usageFlags /*= USAGE_DEFAULT*/);
+    static UMat ones(Size size, int type, UMatUsageFlags usageFlags /*= USAGE_DEFAULT*/);
+    static UMat ones(int ndims, const int* sz, int type, UMatUsageFlags usageFlags /*= USAGE_DEFAULT*/);
+    static UMat ones(int rows, int cols, int type) { return ones(rows, cols, type, USAGE_DEFAULT); }  // OpenCV 5.0: remove abi compatibility overload
+    static UMat ones(Size size, int type) { return ones(size, type, USAGE_DEFAULT); }  // OpenCV 5.0: remove abi compatibility overload
+    static UMat ones(int ndims, const int* sz, int type) { return ones(ndims, sz, type, USAGE_DEFAULT); }  // OpenCV 5.0: remove abi compatibility overload
+    static UMat eye(int rows, int cols, int type, UMatUsageFlags usageFlags /*= USAGE_DEFAULT*/);
+    static UMat eye(Size size, int type, UMatUsageFlags usageFlags /*= USAGE_DEFAULT*/);
+    static UMat eye(int rows, int cols, int type) { return eye(rows, cols, type, USAGE_DEFAULT); }  // OpenCV 5.0: remove abi compatibility overload
+    static UMat eye(Size size, int type) { return eye(size, type, USAGE_DEFAULT); }  // OpenCV 5.0: remove abi compatibility overload
 
     //! allocates new matrix data unless the matrix already has specified size and type.
     // previous data is unreferenced if needed.
@@ -2551,27 +2581,38 @@ public:
          - number of channels
      */
     int flags;
+
     //! the matrix dimensionality, >= 2
     int dims;
-    //! the number of rows and columns or (-1, -1) when the matrix has more than 2 dimensions
-    int rows, cols;
+
+    //! number of rows in the matrix; -1 when the matrix has more than 2 dimensions
+    int rows;
+
+    //! number of columns in the matrix; -1 when the matrix has more than 2 dimensions
+    int cols;
 
     //! custom allocator
     MatAllocator* allocator;
-    UMatUsageFlags usageFlags; // usage flags for allocator
+
+    //! usage flags for allocator; recommend do not set directly, instead set during construct/create/getUMat
+    UMatUsageFlags usageFlags;
+
     //! and the standard allocator
     static MatAllocator* getStdAllocator();
 
     //! internal use method: updates the continuity flag
     void updateContinuityFlag();
 
-    // black-box container of UMat data
+    //! black-box container of UMat data
     UMatData* u;
 
-    // offset of the submatrix (or 0)
+    //! offset of the submatrix (or 0)
     size_t offset;
 
+    //! dimensional size of the matrix; accessible in various formats
     MatSize size;
+
+    //! number of bytes each matrix element/row/plane/dimension occupies
     MatStep step;
 
 protected:
@@ -2822,7 +2863,7 @@ public:
 
      `ref<_Tp>(i0,...[,hashval])` is equivalent to `*(_Tp*)ptr(i0,...,true[,hashval])`.
      The methods always return a valid reference.
-     If the element did not exist, it is created and initialiazed with 0.
+     If the element did not exist, it is created and initialized with 0.
     */
     //! returns reference to the specified element (1D case)
     template<typename _Tp> _Tp& ref(int i0, size_t* hashval=0);
@@ -3538,6 +3579,8 @@ public:
 
     Mat cross(const Mat& m) const;
     double dot(const Mat& m) const;
+
+    void swap(MatExpr& b);
 
     const MatOp* op;
     int flags;

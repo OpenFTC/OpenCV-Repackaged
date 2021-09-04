@@ -44,10 +44,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.StreamCorruptedException;
 
 public class DynamicOpenCvNativeLibLoader
 {
-    private static final String NATIVE_LIB_MD5 = "83995833bd64b46a940e5eda8dafd620";
+    private static final String NATIVE_LIB_FILENAME = "libOpenCvAndroid453.so";
+    private static final String NATIVE_LIB_MD5 = "9d9a9ed11665dc92c91c475aad54ef94";
     private static final String TAG = "OpenFTC-OpenCV-Repackaged-Loader";
     private static boolean alreadyLoaded = false;
     private static Runnable onPeerConnectedRunnable = null;
@@ -138,7 +140,7 @@ public class DynamicOpenCvNativeLibLoader
             setupOpenCvFiles(false);
 
             /*
-             * We've been given the go-ahead! Load up libOpenCvNative.so
+             * We've been given the go-ahead! Load up the native lib!
              */
             System.load(libInProtectedStorage.getAbsolutePath());
             alreadyLoaded = true;
@@ -146,26 +148,26 @@ public class DynamicOpenCvNativeLibLoader
         catch (OpenCvNativeLibNotFoundException e)
         {
             // No period at the end, since a semicolon may be appended by the system
-            String globalWarningMessage = "libOpenCvNative.so was not found, any OpenCV-enabled OpModes will crash. Please copy it to the FIRST folder on the internal storage";
+            String globalWarningMessage = String.format("%s was not found, any OpenCV-enabled OpModes will crash. Please copy it to the FIRST folder on the internal storage", NATIVE_LIB_FILENAME);
             RobotLog.ee(TAG, e, globalWarningMessage);
             RobotLog.setGlobalWarningMessage(globalWarningMessage);
 
-            String dialogTitle = "libOpenCvNative.so not found";
-            String dialogMsg = "libOpenCvNative.so was not found, any OpenCV-enabled OpModes will crash. Please copy it to the FIRST folder on the internal storage.";
+            String dialogTitle = String.format("%s not found", NATIVE_LIB_FILENAME);
+            String dialogMsg = String.format("%s was not found, any OpenCV-enabled OpModes will crash. Please copy it to the FIRST folder on the internal storage.", NATIVE_LIB_FILENAME);
 
             showErrorDialog(dialogTitle, dialogMsg);
         }
         catch (OpenCvNativeLibCorruptedException e)
         {
             // No period at the end, since a semicolon may be appended by the system.
-            String globalWarningMessage = "libOpenCvNative.so is present in the FIRST on the internal storage. However, the MD5 " +
-                    "checksum does not match what is expected. Any OpenCV-enabled OpModes will likely crash. Delete and re-download the file";
+            String globalWarningMessage = String.format("%s is present in the FIRST on the internal storage. However, the MD5 " +
+                    "checksum does not match what is expected. Any OpenCV-enabled OpModes will likely crash. Delete and re-download the file", NATIVE_LIB_FILENAME);
             RobotLog.ee(TAG, e, globalWarningMessage);
             RobotLog.setGlobalWarningMessage(globalWarningMessage);
 
-            String dialogTitle = "libOpenCvNative.so corrupted";
-            String dialogMsg = "libOpenCvNative.so is present in the FIRST on the internal storage. However, the MD5 " +
-                               "checksum does not match what is expected. Any OpenCV-enabled OpModes will likely crash. Delete and re-download the file.";
+            String dialogTitle = String.format("%s corrupted", NATIVE_LIB_FILENAME);
+            String dialogMsg = String.format("%s is present in the FIRST on the internal storage. However, the MD5 " +
+                    "checksum does not match what is expected. Any OpenCV-enabled OpModes will likely crash. Delete and re-download the file.", NATIVE_LIB_FILENAME);
 
             showErrorDialog(dialogTitle, dialogMsg);
         }
@@ -200,9 +202,9 @@ public class DynamicOpenCvNativeLibLoader
 
     private void setupOpenCvFiles(boolean forceCopy) throws OpenCvNativeLibNotFoundException, OpenCvNativeLibCorruptedException, CopyOpenCvNativeLibToProtectedStorageException
     {
-        libInProtectedStorage = new File(rcActivity.getFilesDir() + "/extra/libOpenCvNative.so");
-        protectedExtraFolder = new File(rcActivity.getFilesDir() + "/extra/");
-        libOnSdcard = new File(Environment.getExternalStorageDirectory() + "/FIRST/libOpenCvNative.so");
+        libInProtectedStorage = new File(String.format("%s/extra/%s", rcActivity.getFilesDir(), NATIVE_LIB_FILENAME));
+        protectedExtraFolder = new File(String.format("%s/extra/", rcActivity.getFilesDir()));
+        libOnSdcard = new File(String.format("%s/FIRST/%s", Environment.getExternalStorageDirectory(), NATIVE_LIB_FILENAME));
 
         /*
          * First, check to see if it exists in the protected storage

@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 ext {
     PUBLISH_GROUP_ID = 'org.openftc'
     PUBLISH_ARTIFACT_ID = 'opencv-repackaged'
-    PUBLISH_VERSION = '4.1.0-C'
+    PUBLISH_VERSION = '4.5.3-B'
 
     PUBLISH_DESC = 'OpenCV Repackaged'
     PUBLISH_URL = 'https://github.com/OpenFTC/OpenCV-Repackaged'
@@ -18,18 +18,39 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 21
+
+        externalNativeBuild {
+            cmake {
+                arguments "-DANDROID_STL=c++_shared"
+                targets "dummy_target_cpp_lib"
+            }
+        }
     }
 
     buildTypes {
+        debug {
+            ndk {
+                abiFilters "armeabi-v7a"
+            }
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            ndk {
+                abiFilters "armeabi-v7a"
+            }
         }
     }
 
 
     lintOptions {
         abortOnError false
+    }
+
+    externalNativeBuild {
+        cmake {
+            path (project.projectDir.toString() + '/libcxx_helper/CMakeLists.txt')
+        }
     }
 }
 

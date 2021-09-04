@@ -10,6 +10,8 @@
 # Java class files
 *.class
 
+.cxx/
+
 # Generated files
 bin/
 gen/
