@@ -16,25 +16,18 @@ Unfortunately, due to a [known bug with OpenCV 4.x](https://github.com/opencv/op
 ### So how do I use this?
 
 1. Open your FTC SDK Android Studio project
-2. Open the `build.common.gradle` file:
 
-    ![img-her](doc/images/build-common-gradle.png)
-
-3. Add `jcenter()` to the `repositories` block at the bottom:
-
-    ![img-her](doc/images/jcenter.png)
-
-4. Open the `build.gradle` file for the TeamCode module:
+2. Open the `build.gradle` file for the TeamCode module:
 
     ![img-her](doc/images/teamcode-gradle.png)
 
-5. At the bottom, add this:
+3. At the bottom, add this:
 
         dependencies {
             implementation 'org.openftc:opencv-repackaged:4.1.0-C'
          }
 
-6. Copy `libOpenCvNative.so` from the `/doc` folder of this repo into the `FIRST` folder on the USB storage of the Robot Controller (i.e. connect the Robot Controller to your computer with a USB cable, put it into MTP mode, and drag 'n drop the file).
+6. Copy `libOpenCvAndroid453.so` from the `/doc/native_libs` folder of this repo into the `FIRST` folder on the USB storage of the Robot Controller (i.e. connect the Robot Controller to your computer with a USB cable, put it into MTP mode, and drag 'n drop the file).
 
 7. You can now use OpenCV just as you would as if you had manually imported the module, with one minor difference being you do **not** need to call any methods such as `OpenCVLoader.initDebug()` because the native library is automatically loaded in the background when the SDK boots.
 
