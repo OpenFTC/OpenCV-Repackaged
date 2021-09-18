@@ -33,6 +33,10 @@ Unfortunately, due to a [known bug with OpenCV 4.x](https://github.com/opencv/op
 
 ## Changelog:
 
+#### v4.5.3-B
+
+ - Don't use deprecated `setGlobalWarningMessage(String msg)` method
+
 #### v4.5.3-A
 
  - OpenCV Android SDK updated to v4.5.3
