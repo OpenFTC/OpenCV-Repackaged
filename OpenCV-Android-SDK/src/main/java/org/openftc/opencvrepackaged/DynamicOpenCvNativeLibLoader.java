@@ -122,7 +122,7 @@ public class DynamicOpenCvNativeLibLoader
             // No period at the end, since a semicolon may be appended by the system
             String globalWarningMessage = "Unfortunately, OpenCV 4.x is not compatible with Android versions below 5.0 Lollipop. Any OpenCV-enabled OpModes will crash";
             RobotLog.ee(TAG, globalWarningMessage);
-            RobotLog.setGlobalWarningMessage(globalWarningMessage);
+            RobotLog.addGlobalWarningMessage(globalWarningMessage);
 
             String dialogTitle = "This device is not compatible with OpenCV 4.x";
             String dialogMsg = "Unfortunately, OpenCV 4.x is not compatible with Android versions below 5.0 Lollipop. Any OpenCV-enabled OpModes will crash.";
@@ -150,7 +150,7 @@ public class DynamicOpenCvNativeLibLoader
             // No period at the end, since a semicolon may be appended by the system
             String globalWarningMessage = String.format("%s was not found, any OpenCV-enabled OpModes will crash. Please copy it to the FIRST folder on the internal storage", NATIVE_LIB_FILENAME);
             RobotLog.ee(TAG, e, globalWarningMessage);
-            RobotLog.setGlobalWarningMessage(globalWarningMessage);
+            RobotLog.addGlobalWarningMessage(globalWarningMessage);
 
             String dialogTitle = String.format("%s not found", NATIVE_LIB_FILENAME);
             String dialogMsg = String.format("%s was not found, any OpenCV-enabled OpModes will crash. Please copy it to the FIRST folder on the internal storage.", NATIVE_LIB_FILENAME);
@@ -163,7 +163,7 @@ public class DynamicOpenCvNativeLibLoader
             String globalWarningMessage = String.format("%s is present in the FIRST on the internal storage. However, the MD5 " +
                     "checksum does not match what is expected. Any OpenCV-enabled OpModes will likely crash. Delete and re-download the file", NATIVE_LIB_FILENAME);
             RobotLog.ee(TAG, e, globalWarningMessage);
-            RobotLog.setGlobalWarningMessage(globalWarningMessage);
+            RobotLog.addGlobalWarningMessage(globalWarningMessage);
 
             String dialogTitle = String.format("%s corrupted", NATIVE_LIB_FILENAME);
             String dialogMsg = String.format("%s is present in the FIRST on the internal storage. However, the MD5 " +
@@ -178,7 +178,7 @@ public class DynamicOpenCvNativeLibLoader
                 // No period at the end, since a semicolon may be appended by the system.
                 String globalWarningMessage = "Could not load OpenCV native library because app is running in 64-bit mode. Please remove the arm64-v8a entries from build.common.gradle.";
                 RobotLog.ee(TAG, e, globalWarningMessage);
-                RobotLog.setGlobalWarningMessage(globalWarningMessage);
+                RobotLog.addGlobalWarningMessage(globalWarningMessage);
 
                 String dialogTitle = "Failed to load OpenCV native library";
                 String dialogMsg = "The OpenCV native library could not be loaded because the app is running in 64-bit mode. Please remove the arm64-v8a entries from build.common.gradle. Any OpenCV-enabled OpModes will crash.";
@@ -190,7 +190,7 @@ public class DynamicOpenCvNativeLibLoader
                 // No period at the end, since a semicolon may be appended by the system.
                 String globalWarningMessage = "Error occurred while loading OpenCV native library! Any OpenCV-enabled OpModes will crash";
                 RobotLog.ee(TAG, e, globalWarningMessage);
-                RobotLog.setGlobalWarningMessage(globalWarningMessage);
+                RobotLog.addGlobalWarningMessage(globalWarningMessage);
 
                 String dialogTitle = "Error loading OpenCV native library";
                 String dialogMsg = "An error occurred while loading the OpenCV native library. Any OpenCV-enabled OpModes will crash.";
