@@ -24,7 +24,7 @@ Unfortunately, due to a [known bug with OpenCV 4.x](https://github.com/opencv/op
 3. At the bottom, add this:
 
         dependencies {
-            implementation 'org.openftc:opencv-repackaged:4.5.3-A'
+            implementation 'org.openftc:opencv-repackaged:4.5.3-B'
          }
 
 6. Copy `libOpenCvAndroid453.so` from the `/doc/native_libs` folder of this repo into the `FIRST` folder on the USB storage of the Robot Controller (i.e. connect the Robot Controller to your computer with a USB cable, put it into MTP mode, and drag 'n drop the file).
