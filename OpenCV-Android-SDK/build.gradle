@@ -2,8 +2,8 @@ apply plugin: 'com.android.library'
 
 ext {
     PUBLISH_GROUP_ID = 'org.openftc'
-    PUBLISH_ARTIFACT_ID = 'opencv-repackaged'
-    PUBLISH_VERSION = '4.5.3-B'
+    PUBLISH_ARTIFACT_ID = 'opencv-repackaged-bundled-dylibs'
+    PUBLISH_VERSION = '4.5.3-C'
 
     PUBLISH_DESC = 'OpenCV Repackaged'
     PUBLISH_URL = 'https://github.com/OpenFTC/OpenCV-Repackaged'
@@ -30,14 +30,14 @@ android {
     buildTypes {
         debug {
             ndk {
-                abiFilters "armeabi-v7a"
+                abiFilters "armeabi-v7a", "arm64-v8a"
             }
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             ndk {
-                abiFilters "armeabi-v7a"
+                abiFilters "armeabi-v7a", "arm64-v8a"
             }
         }
     }
