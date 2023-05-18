@@ -4,6 +4,7 @@
 package org.opencv.dnn;
 
 import org.opencv.core.Mat;
+import org.opencv.dnn.ClassificationModel;
 import org.opencv.dnn.Model;
 import org.opencv.dnn.Net;
 
@@ -60,6 +61,40 @@ public class ClassificationModel extends Model {
 
 
     //
+    // C++:  ClassificationModel cv::dnn::ClassificationModel::setEnableSoftmaxPostProcessing(bool enable)
+    //
+
+    /**
+     * Set enable/disable softmax post processing option.
+     *
+     * If this option is true, softmax is applied after forward inference within the classify() function
+     * to convert the confidences range to [0.0-1.0].
+     * This function allows you to toggle this behavior.
+     * Please turn true when not contain softmax layer in model.
+     * @param enable Set enable softmax post processing within the classify() function.
+     * @return automatically generated
+     */
+    public ClassificationModel setEnableSoftmaxPostProcessing(boolean enable) {
+        return new ClassificationModel(setEnableSoftmaxPostProcessing_0(nativeObj, enable));
+    }
+
+
+    //
+    // C++:  bool cv::dnn::ClassificationModel::getEnableSoftmaxPostProcessing()
+    //
+
+    /**
+     * Get enable/disable softmax post processing option.
+     *
+     * This option defaults to false, softmax post processing is not applied within the classify() function.
+     * @return automatically generated
+     */
+    public boolean getEnableSoftmaxPostProcessing() {
+        return getEnableSoftmaxPostProcessing_0(nativeObj);
+    }
+
+
+    //
     // C++:  void cv::dnn::ClassificationModel::classify(Mat frame, int& classId, float& conf)
     //
 
@@ -85,6 +120,12 @@ public class ClassificationModel extends Model {
 
     // C++:   cv::dnn::ClassificationModel::ClassificationModel(Net network)
     private static native long ClassificationModel_2(long network_nativeObj);
+
+    // C++:  ClassificationModel cv::dnn::ClassificationModel::setEnableSoftmaxPostProcessing(bool enable)
+    private static native long setEnableSoftmaxPostProcessing_0(long nativeObj, boolean enable);
+
+    // C++:  bool cv::dnn::ClassificationModel::getEnableSoftmaxPostProcessing()
+    private static native boolean getEnableSoftmaxPostProcessing_0(long nativeObj);
 
     // C++:  void cv::dnn::ClassificationModel::classify(Mat frame, int& classId, float& conf)
     private static native void classify_0(long nativeObj, long frame_nativeObj, double[] classId_out, double[] conf_out);

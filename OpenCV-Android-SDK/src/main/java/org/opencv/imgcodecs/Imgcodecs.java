@@ -59,19 +59,37 @@ public class Imgcodecs {
             IMWRITE_JPEG_RST_INTERVAL = 4,
             IMWRITE_JPEG_LUMA_QUALITY = 5,
             IMWRITE_JPEG_CHROMA_QUALITY = 6,
+            IMWRITE_JPEG_SAMPLING_FACTOR = 7,
             IMWRITE_PNG_COMPRESSION = 16,
             IMWRITE_PNG_STRATEGY = 17,
             IMWRITE_PNG_BILEVEL = 18,
             IMWRITE_PXM_BINARY = 32,
             IMWRITE_EXR_TYPE = (3 << 4) + 0,
             IMWRITE_EXR_COMPRESSION = (3 << 4) + 1,
+            IMWRITE_EXR_DWA_COMPRESSION_LEVEL = (3 << 4) + 2,
             IMWRITE_WEBP_QUALITY = 64,
+            IMWRITE_HDR_COMPRESSION = (5 << 4) + 0,
             IMWRITE_PAM_TUPLETYPE = 128,
             IMWRITE_TIFF_RESUNIT = 256,
             IMWRITE_TIFF_XDPI = 257,
             IMWRITE_TIFF_YDPI = 258,
             IMWRITE_TIFF_COMPRESSION = 259,
             IMWRITE_JPEG2000_COMPRESSION_X1000 = 272;
+
+
+    // C++: enum ImwriteHDRCompressionFlags (cv.ImwriteHDRCompressionFlags)
+    public static final int
+            IMWRITE_HDR_COMPRESSION_NONE = 0,
+            IMWRITE_HDR_COMPRESSION_RLE = 1;
+
+
+    // C++: enum ImwriteJPEGSamplingFactorParams (cv.ImwriteJPEGSamplingFactorParams)
+    public static final int
+            IMWRITE_JPEG_SAMPLING_FACTOR_411 = 0x411111,
+            IMWRITE_JPEG_SAMPLING_FACTOR_420 = 0x221111,
+            IMWRITE_JPEG_SAMPLING_FACTOR_422 = 0x211111,
+            IMWRITE_JPEG_SAMPLING_FACTOR_440 = 0x121111,
+            IMWRITE_JPEG_SAMPLING_FACTOR_444 = 0x111111;
 
 
     // C++: enum ImwritePAMFlags (cv.ImwritePAMFlags)
@@ -312,8 +330,8 @@ public class Imgcodecs {
      *
      * The function imreadmulti loads a multi-page image from the specified file into a vector of Mat objects.
      * @param filename Name of file to be loaded.
+     * @param mats A vector of Mat objects holding each page.
      * @param flags Flag that can take values of cv::ImreadModes, default with cv::IMREAD_ANYCOLOR.
-     * @param mats A vector of Mat objects holding each page, if more than one.
      * SEE: cv::imread
      * @return automatically generated
      */
@@ -330,7 +348,7 @@ public class Imgcodecs {
      *
      * The function imreadmulti loads a multi-page image from the specified file into a vector of Mat objects.
      * @param filename Name of file to be loaded.
-     * @param mats A vector of Mat objects holding each page, if more than one.
+     * @param mats A vector of Mat objects holding each page.
      * SEE: cv::imread
      * @return automatically generated
      */
@@ -352,10 +370,10 @@ public class Imgcodecs {
      *
      * The function imreadmulti loads a specified range from a multi-page image from the specified file into a vector of Mat objects.
      * @param filename Name of file to be loaded.
+     * @param mats A vector of Mat objects holding each page.
      * @param start Start index of the image to load
      * @param count Count number of images to load
      * @param flags Flag that can take values of cv::ImreadModes, default with cv::IMREAD_ANYCOLOR.
-     * @param mats A vector of Mat objects holding each page, if more than one.
      * SEE: cv::imread
      * @return automatically generated
      */
@@ -372,9 +390,9 @@ public class Imgcodecs {
      *
      * The function imreadmulti loads a specified range from a multi-page image from the specified file into a vector of Mat objects.
      * @param filename Name of file to be loaded.
+     * @param mats A vector of Mat objects holding each page.
      * @param start Start index of the image to load
      * @param count Count number of images to load
-     * @param mats A vector of Mat objects holding each page, if more than one.
      * SEE: cv::imread
      * @return automatically generated
      */
@@ -549,6 +567,33 @@ public class Imgcodecs {
 
 
     //
+    // C++:  bool cv::imdecodemulti(Mat buf, int flags, vector_Mat& mats)
+    //
+
+    /**
+     * Reads a multi-page image from a buffer in memory.
+     *
+     * The function imdecodemulti reads a multi-page image from the specified buffer in the memory. If the buffer is too short or
+     * contains invalid data, the function returns false.
+     *
+     * See cv::imreadmulti for the list of supported formats and flags description.
+     *
+     * <b>Note:</b> In the case of color images, the decoded images will have the channels stored in <b>B G R</b> order.
+     * @param buf Input array or vector of bytes.
+     * @param flags The same flags as in cv::imread, see cv::ImreadModes.
+     * @param mats A vector of Mat objects holding each page, if more than one.
+     * @return automatically generated
+     */
+    public static boolean imdecodemulti(Mat buf, int flags, List<Mat> mats) {
+        Mat mats_mat = new Mat();
+        boolean retVal = imdecodemulti_0(buf.nativeObj, flags, mats_mat.nativeObj);
+        Converters.Mat_to_vector_Mat(mats_mat, mats);
+        mats_mat.release();
+        return retVal;
+    }
+
+
+    //
     // C++:  bool cv::imencode(String ext, Mat img, vector_uchar& buf, vector_int params = std::vector<int>())
     //
 
@@ -558,7 +603,7 @@ public class Imgcodecs {
      * The function imencode compresses the image and stores it in the memory buffer that is resized to fit the
      * result. See cv::imwrite for the list of supported formats and flags description.
      *
-     * @param ext File extension that defines the output format.
+     * @param ext File extension that defines the output format. Must include a leading period.
      * @param img Image to be written.
      * @param buf Output buffer resized to fit the compressed image.
      * @param params Format-specific parameters. See cv::imwrite and cv::ImwriteFlags.
@@ -576,7 +621,7 @@ public class Imgcodecs {
      * The function imencode compresses the image and stores it in the memory buffer that is resized to fit the
      * result. See cv::imwrite for the list of supported formats and flags description.
      *
-     * @param ext File extension that defines the output format.
+     * @param ext File extension that defines the output format. Must include a leading period.
      * @param img Image to be written.
      * @param buf Output buffer resized to fit the compressed image.
      * @return automatically generated
@@ -645,6 +690,9 @@ public class Imgcodecs {
 
     // C++:  Mat cv::imdecode(Mat buf, int flags)
     private static native long imdecode_0(long buf_nativeObj, int flags);
+
+    // C++:  bool cv::imdecodemulti(Mat buf, int flags, vector_Mat& mats)
+    private static native boolean imdecodemulti_0(long buf_nativeObj, int flags, long mats_mat_nativeObj);
 
     // C++:  bool cv::imencode(String ext, Mat img, vector_uchar& buf, vector_int params = std::vector<int>())
     private static native boolean imencode_0(String ext, long img_nativeObj, long buf_mat_nativeObj, long params_mat_nativeObj);

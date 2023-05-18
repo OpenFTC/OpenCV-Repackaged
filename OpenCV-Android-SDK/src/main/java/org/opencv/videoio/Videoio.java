@@ -315,7 +315,31 @@ public class Videoio {
             CAP_OPENCV_MJPEG = 2200,
             CAP_INTEL_MFX = 2300,
             CAP_XINE = 2400,
-            CAP_UEYE = 2500;
+            CAP_UEYE = 2500,
+            CAP_OBSENSOR = 2600;
+
+
+    // C++: enum VideoCaptureOBSensorDataType (cv.VideoCaptureOBSensorDataType)
+    public static final int
+            CAP_OBSENSOR_DEPTH_MAP = 0,
+            CAP_OBSENSOR_BGR_IMAGE = 1,
+            CAP_OBSENSOR_IR_IMAGE = 2;
+
+
+    // C++: enum VideoCaptureOBSensorGenerators (cv.VideoCaptureOBSensorGenerators)
+    public static final int
+            CAP_OBSENSOR_DEPTH_GENERATOR = 1 << 29,
+            CAP_OBSENSOR_IMAGE_GENERATOR = 1 << 28,
+            CAP_OBSENSOR_IR_GENERATOR = 1 << 27,
+            CAP_OBSENSOR_GENERATORS_MASK = CAP_OBSENSOR_DEPTH_GENERATOR + CAP_OBSENSOR_IMAGE_GENERATOR + CAP_OBSENSOR_IR_GENERATOR;
+
+
+    // C++: enum VideoCaptureOBSensorProperties (cv.VideoCaptureOBSensorProperties)
+    public static final int
+            CAP_PROP_OBSENSOR_INTRINSIC_FX = 26001,
+            CAP_PROP_OBSENSOR_INTRINSIC_FY = 26002,
+            CAP_PROP_OBSENSOR_INTRINSIC_CX = 26003,
+            CAP_PROP_OBSENSOR_INTRINSIC_CY = 26004;
 
 
     // C++: enum VideoCaptureProperties (cv.VideoCaptureProperties)
@@ -371,7 +395,25 @@ public class Videoio {
             CAP_PROP_ORIENTATION_AUTO = 49,
             CAP_PROP_HW_ACCELERATION = 50,
             CAP_PROP_HW_DEVICE = 51,
-            CAP_PROP_HW_ACCELERATION_USE_OPENCL = 52;
+            CAP_PROP_HW_ACCELERATION_USE_OPENCL = 52,
+            CAP_PROP_OPEN_TIMEOUT_MSEC = 53,
+            CAP_PROP_READ_TIMEOUT_MSEC = 54,
+            CAP_PROP_STREAM_OPEN_TIME_USEC = 55,
+            CAP_PROP_VIDEO_TOTAL_CHANNELS = 56,
+            CAP_PROP_VIDEO_STREAM = 57,
+            CAP_PROP_AUDIO_STREAM = 58,
+            CAP_PROP_AUDIO_POS = 59,
+            CAP_PROP_AUDIO_SHIFT_NSEC = 60,
+            CAP_PROP_AUDIO_DATA_DEPTH = 61,
+            CAP_PROP_AUDIO_SAMPLES_PER_SECOND = 62,
+            CAP_PROP_AUDIO_BASE_INDEX = 63,
+            CAP_PROP_AUDIO_TOTAL_CHANNELS = 64,
+            CAP_PROP_AUDIO_TOTAL_STREAMS = 65,
+            CAP_PROP_AUDIO_SYNCHRONIZE = 66,
+            CAP_PROP_LRF_HAS_KEY_FRAME = 67,
+            CAP_PROP_CODEC_EXTRADATA_INDEX = 68,
+            CAP_PROP_FRAME_TYPE = 69,
+            CAP_PROP_N_THREADS = 70;
 
 
     // C++: enum VideoWriterProperties (cv.VideoWriterProperties)

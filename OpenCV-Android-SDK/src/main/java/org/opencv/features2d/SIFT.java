@@ -207,6 +207,96 @@ public class SIFT extends Feature2D {
     }
 
 
+    //
+    // C++:  void cv::SIFT::setNFeatures(int maxFeatures)
+    //
+
+    public void setNFeatures(int maxFeatures) {
+        setNFeatures_0(nativeObj, maxFeatures);
+    }
+
+
+    //
+    // C++:  int cv::SIFT::getNFeatures()
+    //
+
+    public int getNFeatures() {
+        return getNFeatures_0(nativeObj);
+    }
+
+
+    //
+    // C++:  void cv::SIFT::setNOctaveLayers(int nOctaveLayers)
+    //
+
+    public void setNOctaveLayers(int nOctaveLayers) {
+        setNOctaveLayers_0(nativeObj, nOctaveLayers);
+    }
+
+
+    //
+    // C++:  int cv::SIFT::getNOctaveLayers()
+    //
+
+    public int getNOctaveLayers() {
+        return getNOctaveLayers_0(nativeObj);
+    }
+
+
+    //
+    // C++:  void cv::SIFT::setContrastThreshold(double contrastThreshold)
+    //
+
+    public void setContrastThreshold(double contrastThreshold) {
+        setContrastThreshold_0(nativeObj, contrastThreshold);
+    }
+
+
+    //
+    // C++:  double cv::SIFT::getContrastThreshold()
+    //
+
+    public double getContrastThreshold() {
+        return getContrastThreshold_0(nativeObj);
+    }
+
+
+    //
+    // C++:  void cv::SIFT::setEdgeThreshold(double edgeThreshold)
+    //
+
+    public void setEdgeThreshold(double edgeThreshold) {
+        setEdgeThreshold_0(nativeObj, edgeThreshold);
+    }
+
+
+    //
+    // C++:  double cv::SIFT::getEdgeThreshold()
+    //
+
+    public double getEdgeThreshold() {
+        return getEdgeThreshold_0(nativeObj);
+    }
+
+
+    //
+    // C++:  void cv::SIFT::setSigma(double sigma)
+    //
+
+    public void setSigma(double sigma) {
+        setSigma_0(nativeObj, sigma);
+    }
+
+
+    //
+    // C++:  double cv::SIFT::getSigma()
+    //
+
+    public double getSigma() {
+        return getSigma_0(nativeObj);
+    }
+
+
     @Override
     protected void finalize() throws Throwable {
         delete(nativeObj);
@@ -227,6 +317,36 @@ public class SIFT extends Feature2D {
 
     // C++:  String cv::SIFT::getDefaultName()
     private static native String getDefaultName_0(long nativeObj);
+
+    // C++:  void cv::SIFT::setNFeatures(int maxFeatures)
+    private static native void setNFeatures_0(long nativeObj, int maxFeatures);
+
+    // C++:  int cv::SIFT::getNFeatures()
+    private static native int getNFeatures_0(long nativeObj);
+
+    // C++:  void cv::SIFT::setNOctaveLayers(int nOctaveLayers)
+    private static native void setNOctaveLayers_0(long nativeObj, int nOctaveLayers);
+
+    // C++:  int cv::SIFT::getNOctaveLayers()
+    private static native int getNOctaveLayers_0(long nativeObj);
+
+    // C++:  void cv::SIFT::setContrastThreshold(double contrastThreshold)
+    private static native void setContrastThreshold_0(long nativeObj, double contrastThreshold);
+
+    // C++:  double cv::SIFT::getContrastThreshold()
+    private static native double getContrastThreshold_0(long nativeObj);
+
+    // C++:  void cv::SIFT::setEdgeThreshold(double edgeThreshold)
+    private static native void setEdgeThreshold_0(long nativeObj, double edgeThreshold);
+
+    // C++:  double cv::SIFT::getEdgeThreshold()
+    private static native double getEdgeThreshold_0(long nativeObj);
+
+    // C++:  void cv::SIFT::setSigma(double sigma)
+    private static native void setSigma_0(long nativeObj, double sigma);
+
+    // C++:  double cv::SIFT::getSigma()
+    private static native double getSigma_0(long nativeObj);
 
     // native support for java finalize()
     private static native void delete(long nativeObj);

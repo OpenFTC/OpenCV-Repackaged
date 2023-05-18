@@ -62,7 +62,7 @@ public class HOGDescriptor {
     //
 
     /**
-     * Creates the HOG descriptor and detector with default params.
+     * Creates the HOG descriptor and detector with default parameters.
      *
      *     aqual to HOGDescriptor(Size(64,128), Size(16,16), Size(8,8), Size(8,8), 9 )
      */
@@ -206,6 +206,8 @@ public class HOGDescriptor {
 
     /**
      *
+     *
+     *     Creates the HOG descriptor and detector and loads HOGDescriptor parameters and coefficients for the linear SVM classifier from a file.
      *     @param filename The file name containing HOGDescriptor properties and coefficients for the linear SVM classifier.
      */
     public HOGDescriptor(String filename) {
@@ -270,8 +272,8 @@ public class HOGDescriptor {
     //
 
     /**
-     * loads HOGDescriptor parameters and coefficients for the linear SVM classifier from a file.
-     *     @param filename Path of the file to read.
+     * loads HOGDescriptor parameters and coefficients for the linear SVM classifier from a file
+     *     @param filename Name of the file to read.
      *     @param objname The optional name of the node to read (if empty, the first top-level node will be used).
      * @return automatically generated
      */
@@ -280,8 +282,8 @@ public class HOGDescriptor {
     }
 
     /**
-     * loads HOGDescriptor parameters and coefficients for the linear SVM classifier from a file.
-     *     @param filename Path of the file to read.
+     * loads HOGDescriptor parameters and coefficients for the linear SVM classifier from a file
+     *     @param filename Name of the file to read.
      * @return automatically generated
      */
     public boolean load(String filename) {
@@ -450,7 +452,7 @@ public class HOGDescriptor {
 
 
     //
-    // C++:  void cv::HOGDescriptor::detectMultiScale(Mat img, vector_Rect& foundLocations, vector_double& foundWeights, double hitThreshold = 0, Size winStride = Size(), Size padding = Size(), double scale = 1.05, double finalThreshold = 2.0, bool useMeanshiftGrouping = false)
+    // C++:  void cv::HOGDescriptor::detectMultiScale(Mat img, vector_Rect& foundLocations, vector_double& foundWeights, double hitThreshold = 0, Size winStride = Size(), Size padding = Size(), double scale = 1.05, double groupThreshold = 2.0, bool useMeanshiftGrouping = false)
     //
 
     /**
@@ -465,13 +467,14 @@ public class HOGDescriptor {
      *     @param winStride Window stride. It must be a multiple of block stride.
      *     @param padding Padding
      *     @param scale Coefficient of the detection window increase.
-     *     @param finalThreshold Final threshold
+     *     @param groupThreshold Coefficient to regulate the similarity threshold. When detected, some objects can be covered
+     *     by many rectangles. 0 means not to perform grouping.
      *     @param useMeanshiftGrouping indicates grouping algorithm
      */
-    public void detectMultiScale(Mat img, MatOfRect foundLocations, MatOfDouble foundWeights, double hitThreshold, Size winStride, Size padding, double scale, double finalThreshold, boolean useMeanshiftGrouping) {
+    public void detectMultiScale(Mat img, MatOfRect foundLocations, MatOfDouble foundWeights, double hitThreshold, Size winStride, Size padding, double scale, double groupThreshold, boolean useMeanshiftGrouping) {
         Mat foundLocations_mat = foundLocations;
         Mat foundWeights_mat = foundWeights;
-        detectMultiScale_0(nativeObj, img.nativeObj, foundLocations_mat.nativeObj, foundWeights_mat.nativeObj, hitThreshold, winStride.width, winStride.height, padding.width, padding.height, scale, finalThreshold, useMeanshiftGrouping);
+        detectMultiScale_0(nativeObj, img.nativeObj, foundLocations_mat.nativeObj, foundWeights_mat.nativeObj, hitThreshold, winStride.width, winStride.height, padding.width, padding.height, scale, groupThreshold, useMeanshiftGrouping);
     }
 
     /**
@@ -486,12 +489,13 @@ public class HOGDescriptor {
      *     @param winStride Window stride. It must be a multiple of block stride.
      *     @param padding Padding
      *     @param scale Coefficient of the detection window increase.
-     *     @param finalThreshold Final threshold
+     *     @param groupThreshold Coefficient to regulate the similarity threshold. When detected, some objects can be covered
+     *     by many rectangles. 0 means not to perform grouping.
      */
-    public void detectMultiScale(Mat img, MatOfRect foundLocations, MatOfDouble foundWeights, double hitThreshold, Size winStride, Size padding, double scale, double finalThreshold) {
+    public void detectMultiScale(Mat img, MatOfRect foundLocations, MatOfDouble foundWeights, double hitThreshold, Size winStride, Size padding, double scale, double groupThreshold) {
         Mat foundLocations_mat = foundLocations;
         Mat foundWeights_mat = foundWeights;
-        detectMultiScale_1(nativeObj, img.nativeObj, foundLocations_mat.nativeObj, foundWeights_mat.nativeObj, hitThreshold, winStride.width, winStride.height, padding.width, padding.height, scale, finalThreshold);
+        detectMultiScale_1(nativeObj, img.nativeObj, foundLocations_mat.nativeObj, foundWeights_mat.nativeObj, hitThreshold, winStride.width, winStride.height, padding.width, padding.height, scale, groupThreshold);
     }
 
     /**
@@ -506,6 +510,7 @@ public class HOGDescriptor {
      *     @param winStride Window stride. It must be a multiple of block stride.
      *     @param padding Padding
      *     @param scale Coefficient of the detection window increase.
+     *     by many rectangles. 0 means not to perform grouping.
      */
     public void detectMultiScale(Mat img, MatOfRect foundLocations, MatOfDouble foundWeights, double hitThreshold, Size winStride, Size padding, double scale) {
         Mat foundLocations_mat = foundLocations;
@@ -524,6 +529,7 @@ public class HOGDescriptor {
      *     But if the free coefficient is omitted (which is allowed), you can specify it manually here.
      *     @param winStride Window stride. It must be a multiple of block stride.
      *     @param padding Padding
+     *     by many rectangles. 0 means not to perform grouping.
      */
     public void detectMultiScale(Mat img, MatOfRect foundLocations, MatOfDouble foundWeights, double hitThreshold, Size winStride, Size padding) {
         Mat foundLocations_mat = foundLocations;
@@ -541,6 +547,7 @@ public class HOGDescriptor {
      *     Usually it is 0 and should be specified in the detector coefficients (as the last free coefficient).
      *     But if the free coefficient is omitted (which is allowed), you can specify it manually here.
      *     @param winStride Window stride. It must be a multiple of block stride.
+     *     by many rectangles. 0 means not to perform grouping.
      */
     public void detectMultiScale(Mat img, MatOfRect foundLocations, MatOfDouble foundWeights, double hitThreshold, Size winStride) {
         Mat foundLocations_mat = foundLocations;
@@ -557,6 +564,7 @@ public class HOGDescriptor {
      *     @param hitThreshold Threshold for the distance between features and SVM classifying plane.
      *     Usually it is 0 and should be specified in the detector coefficients (as the last free coefficient).
      *     But if the free coefficient is omitted (which is allowed), you can specify it manually here.
+     *     by many rectangles. 0 means not to perform grouping.
      */
     public void detectMultiScale(Mat img, MatOfRect foundLocations, MatOfDouble foundWeights, double hitThreshold) {
         Mat foundLocations_mat = foundLocations;
@@ -572,6 +580,7 @@ public class HOGDescriptor {
      *     @param foundWeights Vector that will contain confidence values for each detected object.
      *     Usually it is 0 and should be specified in the detector coefficients (as the last free coefficient).
      *     But if the free coefficient is omitted (which is allowed), you can specify it manually here.
+     *     by many rectangles. 0 means not to perform grouping.
      */
     public void detectMultiScale(Mat img, MatOfRect foundLocations, MatOfDouble foundWeights) {
         Mat foundLocations_mat = foundLocations;
@@ -817,9 +826,9 @@ public class HOGDescriptor {
     private static native void detect_3(long nativeObj, long img_nativeObj, long foundLocations_mat_nativeObj, long weights_mat_nativeObj, double hitThreshold);
     private static native void detect_4(long nativeObj, long img_nativeObj, long foundLocations_mat_nativeObj, long weights_mat_nativeObj);
 
-    // C++:  void cv::HOGDescriptor::detectMultiScale(Mat img, vector_Rect& foundLocations, vector_double& foundWeights, double hitThreshold = 0, Size winStride = Size(), Size padding = Size(), double scale = 1.05, double finalThreshold = 2.0, bool useMeanshiftGrouping = false)
-    private static native void detectMultiScale_0(long nativeObj, long img_nativeObj, long foundLocations_mat_nativeObj, long foundWeights_mat_nativeObj, double hitThreshold, double winStride_width, double winStride_height, double padding_width, double padding_height, double scale, double finalThreshold, boolean useMeanshiftGrouping);
-    private static native void detectMultiScale_1(long nativeObj, long img_nativeObj, long foundLocations_mat_nativeObj, long foundWeights_mat_nativeObj, double hitThreshold, double winStride_width, double winStride_height, double padding_width, double padding_height, double scale, double finalThreshold);
+    // C++:  void cv::HOGDescriptor::detectMultiScale(Mat img, vector_Rect& foundLocations, vector_double& foundWeights, double hitThreshold = 0, Size winStride = Size(), Size padding = Size(), double scale = 1.05, double groupThreshold = 2.0, bool useMeanshiftGrouping = false)
+    private static native void detectMultiScale_0(long nativeObj, long img_nativeObj, long foundLocations_mat_nativeObj, long foundWeights_mat_nativeObj, double hitThreshold, double winStride_width, double winStride_height, double padding_width, double padding_height, double scale, double groupThreshold, boolean useMeanshiftGrouping);
+    private static native void detectMultiScale_1(long nativeObj, long img_nativeObj, long foundLocations_mat_nativeObj, long foundWeights_mat_nativeObj, double hitThreshold, double winStride_width, double winStride_height, double padding_width, double padding_height, double scale, double groupThreshold);
     private static native void detectMultiScale_2(long nativeObj, long img_nativeObj, long foundLocations_mat_nativeObj, long foundWeights_mat_nativeObj, double hitThreshold, double winStride_width, double winStride_height, double padding_width, double padding_height, double scale);
     private static native void detectMultiScale_3(long nativeObj, long img_nativeObj, long foundLocations_mat_nativeObj, long foundWeights_mat_nativeObj, double hitThreshold, double winStride_width, double winStride_height, double padding_width, double padding_height);
     private static native void detectMultiScale_4(long nativeObj, long img_nativeObj, long foundLocations_mat_nativeObj, long foundWeights_mat_nativeObj, double hitThreshold, double winStride_width, double winStride_height);

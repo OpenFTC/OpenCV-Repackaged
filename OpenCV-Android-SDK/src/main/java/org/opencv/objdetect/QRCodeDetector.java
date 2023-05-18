@@ -9,13 +9,7 @@ import org.opencv.core.Mat;
 import org.opencv.utils.Converters;
 
 // C++: class QRCodeDetector
-/**
- * Groups the object candidate rectangles.
- *     rectList  Input/output vector of rectangles. Output vector includes retained and grouped rectangles. (The Python list is not modified in place.)
- *     weights Input/output vector of weights of rectangles. Output vector includes weights of retained and grouped rectangles. (The Python list is not modified in place.)
- *     groupThreshold Minimum possible number of rectangles minus 1. The threshold is used in a group of rectangles to retain it.
- *     eps Relative difference between sides of the rectangles to merge them into a group.
- */
+
 public class QRCodeDetector {
 
     protected final long nativeObj;
@@ -60,6 +54,21 @@ public class QRCodeDetector {
      */
     public void setEpsY(double epsY) {
         setEpsY_0(nativeObj, epsY);
+    }
+
+
+    //
+    // C++:  void cv::QRCodeDetector::setUseAlignmentMarkers(bool useAlignmentMarkers)
+    //
+
+    /**
+     * use markers to improve the position of the corners of the QR code
+     *
+     * alignmentMarkers using by default
+     * @param useAlignmentMarkers automatically generated
+     */
+    public void setUseAlignmentMarkers(boolean useAlignmentMarkers) {
+        setUseAlignmentMarkers_0(nativeObj, useAlignmentMarkers);
     }
 
 
@@ -318,6 +327,9 @@ public class QRCodeDetector {
 
     // C++:  void cv::QRCodeDetector::setEpsY(double epsY)
     private static native void setEpsY_0(long nativeObj, double epsY);
+
+    // C++:  void cv::QRCodeDetector::setUseAlignmentMarkers(bool useAlignmentMarkers)
+    private static native void setUseAlignmentMarkers_0(long nativeObj, boolean useAlignmentMarkers);
 
     // C++:  bool cv::QRCodeDetector::detect(Mat img, Mat& points)
     private static native boolean detect_0(long nativeObj, long img_nativeObj, long points_nativeObj);

@@ -1766,6 +1766,27 @@ public class Photo {
     }
 
 
+    //
+    // C++:  void cv::cuda::nonLocalMeans(GpuMat src, GpuMat& dst, float h, int search_window = 21, int block_size = 7, int borderMode = BORDER_DEFAULT, Stream stream = Stream::Null())
+    //
+
+    // Unknown type 'GpuMat' (I), skipping the function
+
+
+    //
+    // C++:  void cv::cuda::fastNlMeansDenoising(GpuMat src, GpuMat& dst, float h, int search_window = 21, int block_size = 7, Stream stream = Stream::Null())
+    //
+
+    // Unknown type 'GpuMat' (I), skipping the function
+
+
+    //
+    // C++:  void cv::cuda::fastNlMeansDenoisingColored(GpuMat src, GpuMat& dst, float h_luminance, float photo_render, int search_window = 21, int block_size = 7, Stream stream = Stream::Null())
+    //
+
+    // Unknown type 'GpuMat' (I), skipping the function
+
+
 
 
     // C++:  void cv::inpaint(Mat src, Mat inpaintMask, Mat& dst, double inpaintRadius, int flags)

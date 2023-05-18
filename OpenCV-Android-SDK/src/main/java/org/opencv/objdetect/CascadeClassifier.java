@@ -104,16 +104,6 @@ public class CascadeClassifier {
      *     cvHaarDetectObjects. It is not used for a new cascade.
      *     @param minSize Minimum possible object size. Objects smaller than that are ignored.
      *     @param maxSize Maximum possible object size. Objects larger than that are ignored. If {@code maxSize == minSize} model is evaluated on single scale.
-     *
-     *     The function is parallelized with the TBB library.
-     *
-     *     <b>Note:</b>
-     * <ul>
-     *   <li>
-     *           (Python) A face detection example using cascade classifiers can be found at
-     *             opencv_source_code/samples/python/facedetect.py
-     *   </li>
-     * </ul>
      */
     public void detectMultiScale(Mat image, MatOfRect objects, double scaleFactor, int minNeighbors, int flags, Size minSize, Size maxSize) {
         Mat objects_mat = objects;
@@ -133,16 +123,6 @@ public class CascadeClassifier {
      *     @param flags Parameter with the same meaning for an old cascade as in the function
      *     cvHaarDetectObjects. It is not used for a new cascade.
      *     @param minSize Minimum possible object size. Objects smaller than that are ignored.
-     *
-     *     The function is parallelized with the TBB library.
-     *
-     *     <b>Note:</b>
-     * <ul>
-     *   <li>
-     *           (Python) A face detection example using cascade classifiers can be found at
-     *             opencv_source_code/samples/python/facedetect.py
-     *   </li>
-     * </ul>
      */
     public void detectMultiScale(Mat image, MatOfRect objects, double scaleFactor, int minNeighbors, int flags, Size minSize) {
         Mat objects_mat = objects;
@@ -161,16 +141,6 @@ public class CascadeClassifier {
      *     to retain it.
      *     @param flags Parameter with the same meaning for an old cascade as in the function
      *     cvHaarDetectObjects. It is not used for a new cascade.
-     *
-     *     The function is parallelized with the TBB library.
-     *
-     *     <b>Note:</b>
-     * <ul>
-     *   <li>
-     *           (Python) A face detection example using cascade classifiers can be found at
-     *             opencv_source_code/samples/python/facedetect.py
-     *   </li>
-     * </ul>
      */
     public void detectMultiScale(Mat image, MatOfRect objects, double scaleFactor, int minNeighbors, int flags) {
         Mat objects_mat = objects;
@@ -188,16 +158,6 @@ public class CascadeClassifier {
      *     @param minNeighbors Parameter specifying how many neighbors each candidate rectangle should have
      *     to retain it.
      *     cvHaarDetectObjects. It is not used for a new cascade.
-     *
-     *     The function is parallelized with the TBB library.
-     *
-     *     <b>Note:</b>
-     * <ul>
-     *   <li>
-     *           (Python) A face detection example using cascade classifiers can be found at
-     *             opencv_source_code/samples/python/facedetect.py
-     *   </li>
-     * </ul>
      */
     public void detectMultiScale(Mat image, MatOfRect objects, double scaleFactor, int minNeighbors) {
         Mat objects_mat = objects;
@@ -214,16 +174,6 @@ public class CascadeClassifier {
      *     @param scaleFactor Parameter specifying how much the image size is reduced at each image scale.
      *     to retain it.
      *     cvHaarDetectObjects. It is not used for a new cascade.
-     *
-     *     The function is parallelized with the TBB library.
-     *
-     *     <b>Note:</b>
-     * <ul>
-     *   <li>
-     *           (Python) A face detection example using cascade classifiers can be found at
-     *             opencv_source_code/samples/python/facedetect.py
-     *   </li>
-     * </ul>
      */
     public void detectMultiScale(Mat image, MatOfRect objects, double scaleFactor) {
         Mat objects_mat = objects;
@@ -239,16 +189,6 @@ public class CascadeClassifier {
      *     rectangles may be partially outside the original image.
      *     to retain it.
      *     cvHaarDetectObjects. It is not used for a new cascade.
-     *
-     *     The function is parallelized with the TBB library.
-     *
-     *     <b>Note:</b>
-     * <ul>
-     *   <li>
-     *           (Python) A face detection example using cascade classifiers can be found at
-     *             opencv_source_code/samples/python/facedetect.py
-     *   </li>
-     * </ul>
      */
     public void detectMultiScale(Mat image, MatOfRect objects) {
         Mat objects_mat = objects;

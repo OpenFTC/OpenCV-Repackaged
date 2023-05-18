@@ -3,7 +3,8 @@ apply plugin: 'com.android.library'
 ext {
     PUBLISH_GROUP_ID = 'org.openftc'
     PUBLISH_ARTIFACT_ID = 'opencv-repackaged-bundled-dylibs'
-    PUBLISH_VERSION = '4.5.3-C'
+    PUBLISH_VERSION = '4.7.0-A'
+    PUBLISH_VERSION_CODE = 4700;
 
     PUBLISH_DESC = 'OpenCV Repackaged'
     PUBLISH_URL = 'https://github.com/OpenFTC/OpenCV-Repackaged'
@@ -16,6 +17,8 @@ android {
     buildToolsVersion "26.0.2"
 
     defaultConfig {
+        versionName PUBLISH_VERSION
+        versionCode PUBLISH_VERSION_CODE
         minSdkVersion 19
         targetSdkVersion 21
 
