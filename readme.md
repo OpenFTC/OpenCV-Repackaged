@@ -17,12 +17,16 @@ To avoid the pain of having to download the OpenCV Android bundle, extract the J
 3. At the bottom, add this:
 
         dependencies {
-            implementation 'org.openftc:opencv-repackaged-bundled-dylibs:4.5.3-C'
+            implementation 'org.openftc:opencv-repackaged-bundled-dylibs:4.7.0-A'
          }
 
 4. You can now use OpenCV just as you would as if you had manually imported the module, with one minor difference being you do **not** need to call any methods such as `OpenCVLoader.initDebug()` because the native library is automatically loaded in the background when the SDK boots.
 
 ## Changelog:
+
+#### v4.7.0-A
+
+- OpenCV Android SDK updated to v4.7.0
 
 #### v4.5.3-C
  - **Artifact name changed to `opencv-repackaged-bundled-dylibs`**
